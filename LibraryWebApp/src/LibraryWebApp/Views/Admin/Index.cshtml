@@ -1,0 +1,32 @@
+﻿@model List<Book>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Admin Acc</title>
+</head>
+<body>
+<div>
+    <h3 style="text-align: center">
+        <a asp-action="Add">Add new Book!</a>
+    </h3>
+    
+
+    @if (Model != null)
+    {
+        <h1>Books:</h1>
+        foreach (var item in Model)
+        {
+            <p>@item.Title, @item.Writer.FirstName @item.Writer.LastName</p>
+            
+        }
+    }
+
+</div>
+</body>
+</html>
