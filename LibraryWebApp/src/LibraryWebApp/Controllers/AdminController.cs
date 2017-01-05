@@ -26,6 +26,7 @@ namespace LibraryWebApp.Controllers
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
             var item = _repository.GetAllBooks();
+            item.Reverse();
             return View(item);
         }
 
@@ -40,14 +41,24 @@ namespace LibraryWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                //TODO: writter repository
                 ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
-                var pisac = new Writer("ime", "prezime", DateTime.Now, Guid.Parse(currentUser.Id));
+                var pisac = new Writer(m.FirstNameWritter, m.LastNameWritter, DateTime.Now, Guid.Parse(currentUser.Id));
                 var item = new Book(m.Text, pisac, Guid.Parse(currentUser.Id));
                 _repository.Add(item);
                 return RedirectToAction("Index");
             }
 
             return View("Adder", m);
+        }
+
+
+        public async Task<IActionResult> DeleteBook(Guid Id)
+        {
+            ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            _repository.Remove(Id, Guid.Parse(currentUser.Id));
+            return RedirectToAction("Index");
+
         }
 
 

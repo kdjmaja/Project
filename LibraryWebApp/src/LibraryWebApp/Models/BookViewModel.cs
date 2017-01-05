@@ -11,5 +11,15 @@ namespace LibraryWebApp.Models
         [Required]
         [MaxLength(50)]
         public string Text { get; set; }
+
+
+        [MaxLength(25)]
+        public string FirstNameWritter { get; set; }
+
+        [MaxLength(25)]
+        public string LastNameWritter { get; set; }
+
+
+
     }
 }

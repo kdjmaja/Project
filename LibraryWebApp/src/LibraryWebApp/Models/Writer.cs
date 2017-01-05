@@ -42,7 +42,7 @@ namespace LibraryWebApp.Models
             }
             else
             {
-                return WriterId.Equals(newObj.WriterId);
+                return (FirstName.Equals(newObj.FirstName) && (LastName.Equals(newObj.LastName)));
             }
 
         }
