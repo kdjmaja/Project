@@ -20,7 +20,7 @@ namespace LibraryWebApp.Models
     {
         //knjiznicar pri unosu nove knjige
         public string Title { get; set; }
-        public int Quantity { get; set; }
+        public int Counter { get; set; }
         public Guid BookId { get; set; }
         public Writer Writer { get; set; }
 
@@ -45,7 +45,7 @@ namespace LibraryWebApp.Models
 
         public Boolean IsAvilable()
         {
-            if (Quantity > 0) return true;
+            if (Counter > 0) return true;
 
             return false;
         }
