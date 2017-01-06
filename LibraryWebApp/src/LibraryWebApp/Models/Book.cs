@@ -16,7 +16,7 @@ namespace LibraryWebApp.Models
         RealisticFiction,
 
     }
-    //VLADIN komm
+    //VLADO
     public class Book
     {
         //knjiznicar pri unosu nove knjige
