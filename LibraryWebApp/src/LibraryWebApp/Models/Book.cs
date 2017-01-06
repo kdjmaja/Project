@@ -16,7 +16,7 @@ namespace LibraryWebApp.Models
         RealisticFiction,
 
     }
-    //najbolja klasa ikad
+    //VLADIN komm
     public class Book
     {
         //knjiznicar pri unosu nove knjige
