@@ -57,7 +57,7 @@ namespace LibraryWebApp.Models
             else
             {
                 item.About = book.About;
-                item.Quantity = book.Quantity;
+                item.Counter = book.Counter;
 
             }
 
