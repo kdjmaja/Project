@@ -40,7 +40,7 @@ namespace LibraryWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                //TODO: writter repository
+                
                 ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
                 Book item = null;
                 var pisac = new Writer(m.FirstNameWritter, m.LastNameWritter, DateTime.Now, Guid.Parse(currentUser.Id));

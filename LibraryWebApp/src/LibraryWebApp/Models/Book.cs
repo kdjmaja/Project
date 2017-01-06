@@ -52,7 +52,7 @@ namespace LibraryWebApp.Models
         }
 
 
-
+        //ovo je jednako
         public override bool Equals(object obj)
         {
             var newObj = obj as Book;
