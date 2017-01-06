@@ -31,7 +31,7 @@ namespace LibraryWebApp.Models
             if(bookItem == null) throw new ArgumentNullException();
             if (_context.Books.Any(s => s.BookId.Equals(bookItem.BookId)))
                 throw new DuplicateBookItemException();
-            
+  
             _context.Books.Add(bookItem);
             _context.SaveChanges();
         }
@@ -57,7 +57,7 @@ namespace LibraryWebApp.Models
             else
             {
                 item.About = book.About;
-                item.Counter = book.Counter;
+                item.Quantity = book.Quantity;
 
             }
 

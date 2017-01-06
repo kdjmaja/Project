@@ -5,19 +5,30 @@ using System.Threading.Tasks;
 
 namespace LibraryWebApp.Models
 {
+
+    public enum Genre
+    {
+        Fiction,
+        Comedy,
+        Drama,
+        Horror,
+        NonFiction,
+        RealisticFiction,
+
+    }
     public class Book
     {
         //knjiznicar pri unosu nove knjige
         public string Title { get; set; }
+        public int Quantity { get; set; }
         public Guid BookId { get; set; }
         public Writer Writer { get; set; }
 
         //dinamicki unosi
         public string About { get; set; }
         //broj knjiga 
-        public int Counter { get; set; }
-        public Guid UserId { get; set; }
 
+        public Guid UserId { get; set; }
         public Book()
         {
             
@@ -34,7 +45,7 @@ namespace LibraryWebApp.Models
 
         public Boolean IsAvilable()
         {
-            if (Counter > 0) return true;
+            if (Quantity > 0) return true;
 
             return false;
         }
