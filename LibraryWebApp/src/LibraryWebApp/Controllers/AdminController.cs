@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace LibraryWebApp.Controllers
 {
     public class AdminController : Controller
@@ -41,7 +40,7 @@ namespace LibraryWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                //TODO: writter repository
+                
                 ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
                 var pisac = new Writer(m.FirstNameWritter, m.LastNameWritter, DateTime.Now, Guid.Parse(currentUser.Id));
                 var item = new Book(m.Text, pisac, Guid.Parse(currentUser.Id));
