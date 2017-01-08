@@ -16,13 +16,10 @@ namespace LibraryWebApp.Models
             _context = context;
         }
 
-        public Book Get(Guid bookId, Guid userId)
+        public Book Get(Guid bookId)
         {
             var item = _context.Books.FirstOrDefault(p => p.BookId.Equals(bookId));
             if (item == null) return null;
-
-            if(!item.UserId.Equals(userId))
-                throw new FieldAccessException();
             return item;
         }
 
@@ -38,18 +35,24 @@ namespace LibraryWebApp.Models
 
         public bool Remove(Guid bookId, Guid userId)
         {
-            var item = Get(bookId, userId);
+            var item = Get(bookId);
             if (item == null) return false;
             _context.Books.Remove(item);
             _context.SaveChanges();
             return true;
         }
 
+        public void Posudi(Guid bookId, Guid userId, string username)
+        {
+            var knjiga = Get(bookId);
+            var Posudba = new Posudba(knjiga, userId, username);
+        }
+
         public void Update(Book book, Guid userId)
         {
             if(book == null) throw new NullReferenceException();
 
-            var item = Get(book.BookId, userId);
+            var item = Get(book.BookId);
             if (item == null)
             {
                 Add(book);
@@ -70,7 +73,7 @@ namespace LibraryWebApp.Models
 
         public List<Book> GetAllBooks()
         {
-            return _context.Books.Include(b => b.Writer).OrderByDescending(p => p.Title).ToList();
+            return _context.Books.Include(b => b.Writer).Include(s => s.Posudbe).OrderByDescending(p => p.Title).ToList();
         }
     }
 }

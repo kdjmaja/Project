@@ -24,6 +24,7 @@ namespace LibraryWebApp.Models
         public int Counter { get; set; }
         public Guid BookId { get; set; }
         public Writer Writer { get; set; }
+        public List<Posudba> Posudbe { get; set; }
 
         //dinamicki unosi
         public string About { get; set; }

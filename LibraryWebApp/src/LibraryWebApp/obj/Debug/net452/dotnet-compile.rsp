@@ -209,6 +209,7 @@ D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Controllers\AccountController.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Controllers\AdminController.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Controllers\HomeController.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Controllers\ManageController.cs
+D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Controllers\MemberController.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Data\ApplicationDbContext.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Data\Migrations\00000000000000_CreateIdentitySchema.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs
@@ -218,6 +219,8 @@ D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Models\ApplicationUser.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Models\Book.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Models\BookRepository.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Models\BookViewModel.cs
+D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Models\Posudba.cs
+D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Models\PosudbaViewModel.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Models\Writer.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Models\AccountViewModels\ExternalLoginConfirmationViewModel.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Models\AccountViewModels\ForgotPasswordViewModel.cs

@@ -9,7 +9,7 @@ namespace LibraryWebApp.Interfaces
     public interface IBookRepository
     {
 
-        Book Get(Guid bookId, Guid userId);
+        Book Get(Guid bookId);
 
         void Add(Book bookItem);
  
