@@ -13,6 +13,9 @@ using LibraryWebApp.Data;
 using LibraryWebApp.Interfaces;
 using LibraryWebApp.Models;
 using LibraryWebApp.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace LibraryWebApp
 {
@@ -47,7 +50,7 @@ namespace LibraryWebApp
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -62,6 +65,15 @@ namespace LibraryWebApp
             services.AddTransient<IBookRepository, BookRepository>();
             services.AddScoped(s => new BookDbContext(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrator"));
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireMailmanRole", policy => policy.RequireRole("Mailman"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -98,5 +110,8 @@ namespace LibraryWebApp
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
+        // In this method we will create default User roles and Admin user for login   
+        
     }
 }
