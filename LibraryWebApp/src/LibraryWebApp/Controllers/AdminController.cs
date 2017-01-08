@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using LibraryWebApp.Interfaces;
 using LibraryWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 namespace LibraryWebApp.Controllers
 {
+    [Authorize(Roles="admin")]
     public class AdminController : Controller
     {
 

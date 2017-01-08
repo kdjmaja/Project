@@ -10,10 +10,6 @@ namespace LibraryWebApp.Controllers
     {
         public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                Response.Redirect("Admin/Index");
-            }
             return View();
 
         }
