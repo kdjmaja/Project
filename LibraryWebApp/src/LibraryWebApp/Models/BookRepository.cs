@@ -73,7 +73,7 @@ namespace LibraryWebApp.Models
 
         public List<Book> GetAllBooks()
         {
-            return _context.Books.Include(b => b.Writer).Include(s => s.Posudbe).OrderByDescending(p => p.Title).ToList();
+            return _context.Books.Include(b => b.Writer).OrderByDescending(p => p.Title).ToList();
         }
     }
 }

@@ -1,59 +1,34 @@
-@model IEnumerable<LibraryWebApp.Models.Book>
+
+
+@model List<Book>
 
 @{
-    ViewData["Title"] = "Index";
+    Layout = "_Layout";
 }
 
-<h2>Index</h2>
+<!DOCTYPE html>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Counter)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.About)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Counter)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.About)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<html>
+<head>
+    <title>All Books</title>
+</head>
+<body>
+    <div>
+        
+
+
+        @if (Model != null)
+        {
+            <h1>Books:</h1>
+            foreach (var item in Model)
+            {
+                <p>
+                    @item.Title, @item.Writer.FirstName @item.Writer.LastName
+                </p>
+
+            }
+        }
+
+    </div>
+</body>
+</html>

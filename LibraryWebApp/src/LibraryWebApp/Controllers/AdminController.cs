@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IdentityModel.Claims;
 using System.Linq;
 using System.Threading.Tasks;
 using LibraryWebApp.Interfaces;
 using LibraryWebApp.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 namespace LibraryWebApp.Controllers
 {
-    [Authorize(Policy="RequireAdministratorRole")]
     public class AdminController : Controller
     {
 
@@ -45,7 +42,7 @@ namespace LibraryWebApp.Controllers
             {
                 
                 ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
-                Book item = null;
+                Book item;
                 var pisac = new Writer(m.FirstNameWritter, m.LastNameWritter, DateTime.Now, Guid.Parse(currentUser.Id));
                 var knjiga = _repository.GetAllBooks().FirstOrDefault(p => p.Writer.Equals(pisac));
                 if (knjiga != null)

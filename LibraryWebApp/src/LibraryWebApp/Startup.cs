@@ -65,20 +65,6 @@ namespace LibraryWebApp
             services.AddTransient<IBookRepository, BookRepository>();
             services.AddScoped(s => new BookDbContext(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrator"));
-            });
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("RequireMailmanRole", policy => policy.RequireRole("Mailman"));
-            });
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("RequireMemberRole", policy => policy.RequireRole("Member"));
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -112,7 +98,7 @@ namespace LibraryWebApp
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Member}/{action=Index}/{id?}");
             });
         }
 

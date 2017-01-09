@@ -4,15 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using LibraryWebApp.Interfaces;
 using LibraryWebApp.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryWebApp.Controllers
 {
     
-
-    [Authorize(Policy = "RequireMemberRole")]
     public class MemberController : Controller
     {
         private readonly IBookRepository _repository;
@@ -24,36 +21,13 @@ namespace LibraryWebApp.Controllers
             _userManager = userManager;
         }
 
-        [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var user = await _userManager.FindByIdAsync(HttpContext.User.Identity.GetUserId());
             var item = _repository.GetAllBooks();
             item.Reverse();
             return View(item);
         }
 
-        public IActionResult AktivnePosudbe()
-        {
-            var item = _repository.GetAllBooks();
-            var posudivane = item.Where(p => p.Posudbe!=null).ToList();
-            List<Posudba> posudbe = new List<Posudba>();
-            foreach (Book book in posudivane)
-            {
-                foreach (Posudba posudba in book.Posudbe)
-                {
-                    if (posudba.Active)
-                    {
-                        posudbe.Add(posudba);
-                    }
-                }
-            }
-            return View(posudbe);
-        }
-
-        public IActionResult Posudivanje(BookViewModel m)
-        {
-            return View();
-        }
+       
     }
 }
