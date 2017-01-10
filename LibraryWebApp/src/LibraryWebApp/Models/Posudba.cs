@@ -29,18 +29,9 @@ namespace LibraryWebApp.Models
             UserId = userId;
             PosudbaId = Guid.NewGuid();
             DanPosudbe = DateTime.Now;
-            DanVracanja = DateTime.Now;
+            DanVracanja = DanPosudbe.AddMonths(1);
             Active = true;
             Username = username;
-        }
-
-        public void Produzi(Guid userId)
-        {
-            if (userId != UserId)
-            {
-                throw new AccessViolationException();
-            }
-            DanVracanja = new DateTime(DanVracanja.Day + 30);
         }
 
         public override bool Equals(object obj)

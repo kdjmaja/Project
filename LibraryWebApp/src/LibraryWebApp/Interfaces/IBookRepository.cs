@@ -19,6 +19,8 @@ namespace LibraryWebApp.Interfaces
 
         void Posudi(Guid bookId, Guid userId, string username);
 
+        void Produzi(Guid bookId, Guid userId);
+
 
 
         //dohvati sve userove posuđene knjige

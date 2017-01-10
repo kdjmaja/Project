@@ -57,6 +57,20 @@ namespace LibraryWebApp.Models
             Update(knjiga, userId);
         }
 
+        public void Produzi(Guid bookId, Guid userId)
+        {
+            var knjiga = Get(bookId);
+            if (knjiga != null && knjiga.Posudbe.Count>0)
+            {
+                var posudba = knjiga.Posudbe.FirstOrDefault(s => s.UserId == userId);
+                if (posudba != null)
+                {
+                    posudba.DanVracanja = posudba.DanVracanja.AddMonths(1);
+                    Update(knjiga, userId);
+                }
+            }
+        }
+
         public void Update(Book book, Guid userId)
         {
             if(book == null) throw new NullReferenceException();
