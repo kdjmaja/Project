@@ -5,34 +5,50 @@ using System.Threading.Tasks;
 
 namespace LibraryWebApp.Models
 {
+
+    public enum Genre
+    {
+        Fiction,
+        Comedy,
+        Drama,
+        Horror,
+        NonFiction,
+        RealisticFiction,
+
+    }
+
     public class Book
     {
         //knjiznicar pri unosu nove knjige
         public string Title { get; set; }
+        public int Counter { get; set; }
         public Guid BookId { get; set; }
         public Writer Writer { get; set; }
+        public List<Posudba> Posudbe { get; set; }
 
         //dinamicki unosi
         public string About { get; set; }
         //broj knjiga 
-        public int Counter { get; set; }
-        public Guid UserId { get; set; }
 
+        public Guid UserId { get; set; }
         public Book()
         {
             
         }
-        public Book(string title, Writer writer, Guid userId)
+        public Book(string title, Writer writer, Guid userId, int counter, string about)
         {
             Title = title;
             Writer = writer;
             BookId = Guid.NewGuid();
             UserId = userId;
+            Posudbe = new List<Posudba>();
+            Counter = counter;
+            About = about;
 
         }
 
 
-        public Boolean IsAvilable()
+        public bool IsAvailable()
         {
             if (Counter > 0) return true;
 
@@ -40,7 +56,7 @@ namespace LibraryWebApp.Models
         }
 
 
-
+        //ovo je jednako
         public override bool Equals(object obj)
         {
             var newObj = obj as Book;

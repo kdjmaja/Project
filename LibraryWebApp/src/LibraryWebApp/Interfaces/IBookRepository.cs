@@ -9,15 +9,21 @@ namespace LibraryWebApp.Interfaces
     public interface IBookRepository
     {
 
-        Book Get(Guid bookId, Guid userId);
+        Book Get(Guid bookId);
 
         void Add(Book bookItem);
  
         bool Remove(Guid bookId, Guid userId);
 
         void Update(Book book, Guid userId);
-        
-        
+
+        bool Posudi(Guid bookId, Guid userId, string username);
+
+        void Produzi(Guid bookId, Guid userId);
+
+        List<Posudba> MojePosubeList(Guid userId);
+
+
 
         //dohvati sve userove posuđene knjige
         List<Book> GetAllUserBooks(Guid userId);

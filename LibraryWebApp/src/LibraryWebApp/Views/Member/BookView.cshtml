@@ -1,0 +1,34 @@
+@model LibraryWebApp.Models.Book
+
+@{
+    ViewData["Title"] = "BookView";
+}
+
+<!DOCTYPE html>
+
+<h2>Book Details</h2>
+
+<div>
+    @if (Model != null)
+    {
+            <p>
+                
+                Naslov: @Model.Title
+                <br>
+                Autor: @Model.Writer.FirstName @Model.Writer.LastName<br>
+                Genre: Nek bude zasad prazno<br>
+                About:<br>
+                <h5 style="margin-left: 30px">
+                    @Model.About<br>
+                </h5>
+                Kolicina: @Model.Counter<br>
+                   
+                <input type="submit" value="Posudi knjigu" class="btn btn-primary btn-lg"  onclick="location.href='@Url.Action("BorrowBook", "Member",new { id = @Model.BookId })'" />
+                
+            </p>
+    }
+</div>
+<div>
+    @Html.ActionLink("Edit", "Index", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

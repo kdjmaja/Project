@@ -13,6 +13,7 @@ namespace LibraryWebApp
 
         public IDbSet<Book> Books { get; set; }
         public IDbSet<Writer> Writers { get; set; }
+        public IDbSet<Posudba> Posudbe { get; set; }
 
         public BookDbContext(string connectionString) : base(connectionString) { }
 
@@ -21,12 +22,20 @@ namespace LibraryWebApp
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Book>().HasKey(s => s.BookId);
             modelBuilder.Entity<Book>().Property(s => s.Title).IsRequired();
-            
+            modelBuilder.Entity<Book>().HasMany(s => s.Posudbe).WithRequired(s => s.Book);
+
             modelBuilder.Entity<Book>().HasOptional(s => s.Writer).WithMany(p => p.WritersBooks);
+
 
             modelBuilder.Entity<Writer>().HasKey(s => s.WriterId);
             modelBuilder.Entity<Writer>().Property(s => s.FirstName);
             modelBuilder.Entity<Writer>().Property(s => s.LastName);
+
+            modelBuilder.Entity<Posudba>().HasKey(s => s.PosudbaId);
+            modelBuilder.Entity<Posudba>().Property(s => s.Title);
+            modelBuilder.Entity<Posudba>().Property(s => s.DanPosudbe);
+            modelBuilder.Entity<Posudba>().Property(s => s.DanVracanja);
+            modelBuilder.Entity<Posudba>().Property(s => s.Username);
         }
     }
 }

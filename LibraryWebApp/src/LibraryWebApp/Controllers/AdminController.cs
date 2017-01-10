@@ -40,10 +40,20 @@ namespace LibraryWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                //TODO: writter repository
+                
                 ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
+                Book item;
                 var pisac = new Writer(m.FirstNameWritter, m.LastNameWritter, DateTime.Now, Guid.Parse(currentUser.Id));
-                var item = new Book(m.Text, pisac, Guid.Parse(currentUser.Id));
+                var knjiga = _repository.GetAllBooks().FirstOrDefault(p => p.Writer.Equals(pisac));
+                if (knjiga != null)
+                {
+                    Writer pisac1 = knjiga.Writer;
+                    item = new Book(m.Text, pisac1, Guid.Parse(currentUser.Id),m.Counter,m.About);
+                }
+                else
+                {
+                    item = new Book(m.Text, pisac, Guid.Parse(currentUser.Id),m.Counter,m.About);
+                }
                 _repository.Add(item);
                 return RedirectToAction("Index");
             }

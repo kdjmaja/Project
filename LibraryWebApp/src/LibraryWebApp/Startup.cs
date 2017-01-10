@@ -13,6 +13,9 @@ using LibraryWebApp.Data;
 using LibraryWebApp.Interfaces;
 using LibraryWebApp.Models;
 using LibraryWebApp.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace LibraryWebApp
 {
@@ -47,7 +50,7 @@ namespace LibraryWebApp
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -95,8 +98,11 @@ namespace LibraryWebApp
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Member}/{action=Index}/{id?}");
             });
         }
+
+        // In this method we will create default User roles and Admin user for login   
+        
     }
 }
