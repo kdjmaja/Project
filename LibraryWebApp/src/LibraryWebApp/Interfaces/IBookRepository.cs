@@ -16,8 +16,10 @@ namespace LibraryWebApp.Interfaces
         bool Remove(Guid bookId, Guid userId);
 
         void Update(Book book, Guid userId);
-        
-        
+
+        void Posudi(Guid bookId, Guid userId, string username);
+
+
 
         //dohvati sve userove posuđene knjige
         List<Book> GetAllUserBooks(Guid userId);

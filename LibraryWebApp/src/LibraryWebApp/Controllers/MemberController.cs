@@ -28,6 +28,13 @@ namespace LibraryWebApp.Controllers
             return View(item);
         }
 
-       
+        public async Task<IActionResult> BorrowBook(Guid Id)
+        {
+            ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            _repository.Posudi(Id, Guid.Parse(currentUser.Id),currentUser.UserName);
+            return RedirectToAction("Index");
+
+        }
+
     }
 }

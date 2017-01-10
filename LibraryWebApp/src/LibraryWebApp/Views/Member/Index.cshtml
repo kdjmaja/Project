@@ -24,6 +24,11 @@
             {
                 <p>
                     @item.Title, @item.Writer.FirstName @item.Writer.LastName
+                    <a asp-controller="Member" asp-action="BorrowBook" asp-route-id="@item.BookId">Borrow Book</a>
+                    @if (item.Posudbe.FirstOrDefault() != null)
+                    {
+                        @item.Posudbe.FirstOrDefault().Username;
+                    }
                 </p>
 
             }

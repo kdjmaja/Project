@@ -41,11 +41,12 @@ namespace LibraryWebApp.Models
             Writer = writer;
             BookId = Guid.NewGuid();
             UserId = userId;
-
+            Posudbe = new List<Posudba>();
+            Counter = 0;
         }
 
 
-        public Boolean IsAvilable()
+        public bool IsAvailable()
         {
             if (Counter > 0) return true;
 

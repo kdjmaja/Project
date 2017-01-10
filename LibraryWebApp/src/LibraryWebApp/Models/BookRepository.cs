@@ -18,7 +18,7 @@ namespace LibraryWebApp.Models
 
         public Book Get(Guid bookId)
         {
-            var item = _context.Books.FirstOrDefault(p => p.BookId.Equals(bookId));
+            var item = _context.Books.Include(b => b.Writer).Include(b => b.Posudbe).FirstOrDefault(p => p.BookId.Equals(bookId));
             if (item == null) return null;
             return item;
         }
@@ -27,9 +27,12 @@ namespace LibraryWebApp.Models
         {
             if(bookItem == null) throw new ArgumentNullException();
             if (_context.Books.Any(s => s.BookId.Equals(bookItem.BookId)))
-                throw new DuplicateBookItemException();
-  
-            _context.Books.Add(bookItem);
+                bookItem.Counter++;
+
+            else
+            {
+                _context.Books.Add(bookItem);
+            }
             _context.SaveChanges();
         }
 
@@ -45,7 +48,13 @@ namespace LibraryWebApp.Models
         public void Posudi(Guid bookId, Guid userId, string username)
         {
             var knjiga = Get(bookId);
-            var Posudba = new Posudba(knjiga, userId, username);
+            var borrow = new Posudba(knjiga, userId, username);
+            if (knjiga.Posudbe == null)
+            {
+                knjiga.Posudbe = new List<Posudba>();
+            }
+            knjiga.Posudbe.Add(borrow);
+            Update(knjiga, userId);
         }
 
         public void Update(Book book, Guid userId)
@@ -61,8 +70,10 @@ namespace LibraryWebApp.Models
             {
                 item.About = book.About;
                 item.Counter = book.Counter;
+                item.Posudbe = book.Posudbe.ToList();
 
             }
+            _context.SaveChanges();
 
         }
 
@@ -73,7 +84,7 @@ namespace LibraryWebApp.Models
 
         public List<Book> GetAllBooks()
         {
-            return _context.Books.Include(b => b.Writer).OrderByDescending(p => p.Title).ToList();
+            return _context.Books.Include(b => b.Writer).Include(b => b.Posudbe).OrderByDescending(p => p.Title).ToList();
         }
     }
 }

@@ -17,15 +17,19 @@ namespace LibraryWebApp.Models
         public bool Active { get; set; }
         public string Username { get; set; }
 
+        public Posudba()
+        {
+            
+        }
         public Posudba(Book book, Guid userId, string username)
         {
             Book = book;
             Title = book.Title;
             Writer = book.Writer;
             UserId = userId;
-            PosudbaId = new Guid();
+            PosudbaId = Guid.NewGuid();
             DanPosudbe = DateTime.Now;
-            DanVracanja = new DateTime(DanPosudbe.Day+30);
+            DanVracanja = DateTime.Now;
             Active = true;
             Username = username;
         }
