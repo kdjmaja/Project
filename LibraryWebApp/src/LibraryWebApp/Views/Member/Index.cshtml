@@ -22,7 +22,7 @@
             <h1>Books:</h1>
             foreach (var item in Model)
             {
-                <p>
+                <p style="margin-left: 30px">
                     <a asp-controller="Member" asp-action="BookDetails" asp-route-id="@item.BookId">@item.Title, @item.Writer.FirstName @item.Writer.LastName</a>
                 </p>
 
