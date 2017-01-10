@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Threading.Tasks;
 using LibraryWebApp.Interfaces;
@@ -45,7 +46,7 @@ namespace LibraryWebApp.Models
             return true;
         }
 
-        public void Posudi(Guid bookId, Guid userId, string username)
+        public bool Posudi(Guid bookId, Guid userId, string username)
         {
             var knjiga = Get(bookId);
             var borrow = new Posudba(knjiga, userId, username);
@@ -53,8 +54,14 @@ namespace LibraryWebApp.Models
             {
                 knjiga.Posudbe = new List<Posudba>();
             }
-            knjiga.Posudbe.Add(borrow);
-            Update(knjiga, userId);
+            if (knjiga.Posudbe.FirstOrDefault(p => p.Username == username) == null ||
+                knjiga.Posudbe.FirstOrDefault(p => p.Username == username).Active == false)
+            {
+                knjiga.Posudbe.Add(borrow);
+                Update(knjiga, userId);
+                return true;
+            }
+            return false;
         }
 
         public void Produzi(Guid bookId, Guid userId)
@@ -89,6 +96,24 @@ namespace LibraryWebApp.Models
             }
             _context.SaveChanges();
 
+        }
+
+        public List<Posudba> MojePosubeList(Guid userId)
+        {
+            var books = GetAllBooks();
+            var posudene = books.Where(p => p.Posudbe.Count > 0);
+            List<Posudba> posudbe = new List<Posudba>();
+            foreach (var book in posudene)
+            {
+                foreach (var posudba in book.Posudbe)
+                {
+                    if (posudba.UserId == userId)
+                    {
+                        posudbe.Add(posudba);
+                    }
+                }
+            }
+            return posudbe;
         }
 
         public List<Book> GetAllUserBooks(Guid userId)

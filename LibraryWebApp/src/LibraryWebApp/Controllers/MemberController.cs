@@ -31,8 +31,9 @@ namespace LibraryWebApp.Controllers
         public async Task<IActionResult> BorrowBook(Guid Id)
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
-            _repository.Posudi(Id, Guid.Parse(currentUser.Id),currentUser.UserName);
-            return RedirectToAction("Index");
+            bool uspjelo = _repository.Posudi(Id, Guid.Parse(currentUser.Id),currentUser.UserName);
+            return RedirectToAction("MojePosudbe");
+
 
         }
 
@@ -47,19 +48,8 @@ namespace LibraryWebApp.Controllers
         public async Task<IActionResult> MojePosudbe()
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
-            var books = _repository.GetAllBooks();
-            var posudene = books.Where(p => p.Posudbe.Count > 0);
-            List<Posudba> posudbe = new List<Posudba>();
-            foreach (var book in posudene)
-            {
-                foreach (var posudba in book.Posudbe)
-                {
-                    if (posudba.UserId == Guid.Parse(currentUser.Id))
-                    {
-                        posudbe.Add(posudba);
-                    }
-                }
-            }
+            List<Posudba> posudbe = _repository.MojePosubeList(Guid.Parse(currentUser.Id));
+            posudbe = posudbe.OrderBy(p => p.DanVracanja.Date).ToList();
             return View(posudbe);
         }
         

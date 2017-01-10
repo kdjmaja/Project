@@ -17,9 +17,11 @@ namespace LibraryWebApp.Interfaces
 
         void Update(Book book, Guid userId);
 
-        void Posudi(Guid bookId, Guid userId, string username);
+        bool Posudi(Guid bookId, Guid userId, string username);
 
         void Produzi(Guid bookId, Guid userId);
+
+        List<Posudba> MojePosubeList(Guid userId);
 
 
 

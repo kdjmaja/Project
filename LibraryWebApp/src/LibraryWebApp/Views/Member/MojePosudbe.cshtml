@@ -1,22 +1,35 @@
 @model List<Posudba>
 
 @{
-    ViewData["Title"] = "MojePosudbe";
+    ViewData["Title"] = "Moje Posudbe";
 }
 
-<h2>MojePosudbe</h2>
+<h1>Moje posudbe</h1>
 
 <form asp-action="MojePosudbe">
     @if (Model != null)
     {
-        <h1>Sve posudbe:</h1>
+        <h2>Aktivne posudbe:</h2>
+        foreach (var item in Model)
+        {
+            if (item.Active)
+            {
+                <p>
+                @item.Title, @item.DanPosudbe - @item.DanVracanja
+                <a asp-controller="Member" asp-action="Produzi" asp-route-id="@item.Book.BookId">Produzi rok</a>
+            </p>
+            }
+
+        }
+        <h2>Sve posudbe:</h2>
         foreach (var item in Model)
         {
             <p>
                 @item.Title, @item.DanPosudbe - @item.DanVracanja
-            <a asp-controller="Member" asp-action="Produzi" asp-route-id="@item.Book.BookId">Produzi rok</a></p>
+            </p>
 
         }
+        
     }
 </form>
 
