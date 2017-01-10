@@ -52,7 +52,12 @@ namespace LibraryWebApp.Controllers
             posudbe = posudbe.OrderBy(p => p.DanVracanja.Date).ToList();
             return View(posudbe);
         }
-        
+
+        public IActionResult BookDetails(Guid Id)
+        {
+            var item = _repository.Get(Id);
+            return View("BookView", item);
+        }
 
 
 

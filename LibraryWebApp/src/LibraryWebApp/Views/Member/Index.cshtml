@@ -23,8 +23,7 @@
             foreach (var item in Model)
             {
                 <p>
-                    @item.Title, @item.Writer.FirstName @item.Writer.LastName
-                    <a asp-controller="Member" asp-action="BorrowBook" asp-route-id="@item.BookId">Borrow Book</a>
+                    <a asp-controller="Member" asp-action="BookDetails" asp-route-id="@item.BookId">@item.Title, @item.Writer.FirstName @item.Writer.LastName</a>
                 </p>
 
             }

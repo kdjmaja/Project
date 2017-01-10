@@ -19,7 +19,8 @@ namespace LibraryWebApp.Models
         [MaxLength(25)]
         public string LastNameWritter { get; set; }
 
-
+        [Required]
+        public int Counter { get; set; }
 
     }
 }

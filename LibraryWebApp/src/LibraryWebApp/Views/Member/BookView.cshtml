@@ -1,0 +1,31 @@
+@model LibraryWebApp.Models.Book
+
+@{
+    ViewData["Title"] = "BookView";
+}
+
+<!DOCTYPE html>
+
+<h2>Book Details</h2>
+
+<div>
+    <h4>Book</h4>
+    @if (Model != null)
+    {
+        <h1>Books:</h1>
+
+            <p>
+                
+                Naslov: @Model.Title<br>
+                Autor: @Model.Writer.FirstName @Model.Writer.LastName<br>
+                Genre: Nek bude zasad prazno<br>
+                Kolicina: @Model.Counter<br>
+                <a asp-controller="Member" asp-action="BorrowBook" asp-route-id="@Model.BookId">Posudi knjigu</a>
+            </p>
+
+    }
+</div>
+<div>
+    @Html.ActionLink("Edit", "Index", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

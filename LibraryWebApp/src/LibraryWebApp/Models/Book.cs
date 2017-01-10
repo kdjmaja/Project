@@ -35,14 +35,14 @@ namespace LibraryWebApp.Models
         {
             
         }
-        public Book(string title, Writer writer, Guid userId)
+        public Book(string title, Writer writer, Guid userId, int counter)
         {
             Title = title;
             Writer = writer;
             BookId = Guid.NewGuid();
             UserId = userId;
             Posudbe = new List<Posudba>();
-            Counter = 0;
+            Counter = counter;
         }
 
 

@@ -48,11 +48,11 @@ namespace LibraryWebApp.Controllers
                 if (knjiga != null)
                 {
                     Writer pisac1 = knjiga.Writer;
-                    item = new Book(m.Text, pisac1, Guid.Parse(currentUser.Id));
+                    item = new Book(m.Text, pisac1, Guid.Parse(currentUser.Id),m.Counter);
                 }
                 else
                 {
-                    item = new Book(m.Text, pisac, Guid.Parse(currentUser.Id));
+                    item = new Book(m.Text, pisac, Guid.Parse(currentUser.Id),m.Counter);
                 }
                 _repository.Add(item);
                 return RedirectToAction("Index");
