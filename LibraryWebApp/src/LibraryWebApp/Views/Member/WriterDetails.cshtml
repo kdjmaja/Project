@@ -1,0 +1,36 @@
+@model LibraryWebApp.Models.Writer
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>All Writers</title>
+</head>
+<body>
+    <div>
+
+
+
+        @if (Model != null)
+        {
+            <h1>Writer:</h1>
+            <p>
+                @Model.LastName, @Model.FirstName<br>
+                @Model.Birthday.ToShortDateString()<br>
+                @Model.AboutWriter<br>
+                Djela:<br>
+                @foreach(var item in Model.WritersBooks)
+                {
+                    @item.Title<br>
+
+                }
+            </p>
+        }
+
+    </div>
+</body>
+</html>

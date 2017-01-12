@@ -21,6 +21,27 @@ namespace LibraryWebApp.Controllers
             _repository = repository;
             _userManager = userManager;
         }
+        
+        public IActionResult Edit(Guid Id)
+        {
+            if (ModelState.IsValid)
+            {
+                var item = _repository.Get(Id);
+                if (item != null)
+                {
+                    return View("Edit", item);
+                }
+            }
+            return View("Index");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit([Bind("BookId","Title", "Counter", "About","UserId","Writer")]Book book)
+        {
+            ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            _repository.Edit(book, Guid.Parse(currentUser.Id));
+            return View("Index");
+        }
         public async Task<IActionResult> Index()
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);

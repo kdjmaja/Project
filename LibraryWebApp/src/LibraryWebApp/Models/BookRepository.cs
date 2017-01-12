@@ -19,7 +19,7 @@ namespace LibraryWebApp.Models
 
         public Book Get(Guid bookId)
         {
-            var item = _context.Books.Include(b => b.Writer).Include(b => b.Posudbe).FirstOrDefault(p => p.BookId.Equals(bookId));
+            var item = _context.Books.Include(b => b.Writer).Include(p => p.Writer.WritersBooks).Include(b => b.Posudbe).FirstOrDefault(p => p.BookId.Equals(bookId));
             if (item == null) return null;
             return item;
         }
@@ -37,10 +37,37 @@ namespace LibraryWebApp.Models
             _context.SaveChanges();
         }
 
+        public void Edit(Book book, Guid userId)
+        {
+            var item = Get(book.BookId);
+            _context.Books.Attach(item);
+
+            item.Counter = book.Counter;
+            item.About = book.About;
+            item.Writer.FirstName = book.Writer.FirstName;
+            item.Writer.LastName = book.Writer.LastName;
+
+            List<Posudba> borrows = SvePosudbe().Where(p => p.Title == item.Title).ToList();
+            for(var i=0; i < borrows.Count; i++)
+            {
+                var posudba = borrows.ElementAt(i);
+                _context.Posudbe.Attach(posudba);
+                posudba.Title = book.Title;
+                posudba.Writer.FirstName = book.Writer.FirstName;
+                posudba.Writer.LastName = book.Writer.LastName;
+            }
+            item.Title = book.Title;
+            _context.SaveChanges();
+        }
+
         public bool Remove(Guid bookId, Guid userId)
         {
             var item = Get(bookId);
             if (item == null) return false;
+            if(item.Writer.WritersBooks.Count == 1)
+            {
+                _context.Writers.Remove(item.Writer);
+            }
             _context.Books.Remove(item);
             _context.SaveChanges();
             return true;
@@ -115,7 +142,33 @@ namespace LibraryWebApp.Models
             }
             return posudbe;
         }
+        public List<Posudba> SvePosudbe()
+        {
+            var books = GetAllBooks();
+            var posudene = books.Where(p => p.Posudbe.Count > 0);
+            List<Posudba> posudbe = new List<Posudba>();
+            foreach (var book in posudene)
+            {
+                foreach (var posudba in book.Posudbe)
+                {
 
+                        posudbe.Add(posudba);
+
+                }
+            }
+            return posudbe;
+        }
+        public List<Writer> GetAllWriters()
+        {
+            return _context.Writers.ToList();
+        }
+
+        public Writer GetWriter(Guid writerId)
+        {
+            var item = _context.Writers.Include(p => p.WritersBooks).FirstOrDefault(p => p.WriterId.Equals(writerId));
+            if (item == null) return null;
+            return item;
+        }
         public List<Book> GetAllUserBooks(Guid userId)
         {
             return _context.Books.Where(s => s.UserId.Equals(userId)).OrderByDescending(s => s.Title).ToList();

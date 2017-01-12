@@ -1,0 +1,32 @@
+@model List<LibraryWebApp.Models.Writer>
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>All Writers</title>
+</head>
+<body>
+    <div>
+
+
+
+        @if (Model != null)
+        {
+            <h1>Books:</h1>
+            foreach (var item in Model)
+            {
+                <p style="margin-left: 30px">
+                    <a asp-controller="Member" asp-action="WriterDetails" asp-route-id="@item.WriterId">@item.LastName, @item.FirstName</a>
+                </p>
+
+            }
+        }
+
+    </div>
+</body>
+</html>

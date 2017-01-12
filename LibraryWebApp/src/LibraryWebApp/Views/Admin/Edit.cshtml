@@ -1,0 +1,73 @@
+@model LibraryWebApp.Models.Book
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<!DOCTYPE html>
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(book => book.BookId)
+    @Html.HiddenFor(book => book.UserId)
+    @Html.HiddenFor(book => book.Writer.WriterId)
+    <form asp-action="Edit">
+        <div class="form-horizontal">
+            <h4>Book</h4>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Counter" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="Counter" class="form-control" />
+                    <span asp-validation-for="Counter" class="text-danger" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="About" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="About" class="form-control" />
+                    <span asp-validation-for="About" class="text-danger" />
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Writer.FirstName" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="Writer.FirstName" class="form-control" />
+                    <span asp-validation-for="Writer.FirstName" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Writer.LastName" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="Writer.LastName" class="form-control" />
+                    <span asp-validation-for="Writer.LastName" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+}
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

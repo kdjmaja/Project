@@ -23,12 +23,16 @@ namespace LibraryWebApp.Interfaces
 
         List<Posudba> MojePosubeList(Guid userId);
 
-
+        void Edit(Book book, Guid userId);
 
         //dohvati sve userove posuđene knjige
         List<Book> GetAllUserBooks(Guid userId);
         
         List<Book> GetAllBooks();
+
+        List<Writer> GetAllWriters();
+
+        Writer GetWriter(Guid writerId);
 
 
         //List<Book> GetFiltered(Func<Book, bool> filterFunction, Guid userId);

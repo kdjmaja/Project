@@ -15,7 +15,7 @@
             if (item.Active)
             {
                 <p>
-                @item.Title, @item.DanPosudbe.ToShortDateString() - @item.DanVracanja.ToShortDateString()
+                @item.Title, @item.Writer.FirstName @item.Writer.LastName, @item.DanPosudbe.ToShortDateString() - @item.DanVracanja.ToShortDateString()
                 <a asp-controller="Member" asp-action="Produzi" asp-route-id="@item.Book.BookId">Produzi rok</a>
             </p>
             }

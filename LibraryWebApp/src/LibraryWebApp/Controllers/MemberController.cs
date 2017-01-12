@@ -53,6 +53,18 @@ namespace LibraryWebApp.Controllers
             return View(posudbe);
         }
 
+        public IActionResult AllWriters()
+        {
+            List<Writer> pisci = _repository.GetAllWriters();
+            pisci = pisci.OrderBy(p => p.LastName).ToList();
+            return View(pisci);
+        }
+
+        public IActionResult WriterDetails(Guid Id)
+        {
+            var pisac = _repository.GetWriter(Id);
+            return View(pisac);
+        }
         public IActionResult BookDetails(Guid Id)
         {
             var item = _repository.Get(Id);
