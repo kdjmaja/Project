@@ -1,13 +1,37 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background: url(/images/slika_knjiga.jpg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-attachment: fixed;
+
 }
+
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+}
+#buttonMy {
+    background: transparent;
+    margin-top: 100px;
+    color: #f2f2f2;
+    text-shadow: 2px 1px 4px black;
+    padding: 18px 28px;
+    font-size: 38px; 
+    line-height: normal;
+    -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+            border-radius: 8px;
+
+
+}
+#buttonMy:hover {
+    background: white;
+    color: #333333;
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
@@ -17,25 +41,81 @@ textarea {
     max-width: 280px;
 }
 
+#citeText {
+    padding-top: 200px;
+    font-size: 500%;
+    font-family: sans;
+    font-weight: lighter;
+    text-shadow: 2px 1px 4px black;
+    color: #f2f2f2;
+    line-height: 3em;
+
+}
+#pisacText {
+    font-size: 500%;
+    font-family: serif;
+    color: #333333;
+}
 
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;
     line-height: 1.4;
 }
+    #footer {
+        background: #3388ff;
+        clear: both;
+        margin-top: 300px;
+        margin-bottom: -25px;
+        padding-bottom: 50px;
+        border-top: 1px solid grey;
+        padding: 100px;
+        font-size: 200%;
+        text-align: center;
+        font-family: sans-serif;
+    }
 
 #navbarColor {
     background: #d9d9d9;
     border: #e6e6e6;
 }
+#navbarButton {
+    background: #3388ff;
+    
+}
+#navbarButton:hover {
+    background: #004ab3;
+}
 
 /* Dodano za projekt */
 #navbarTextColor{
-    color: #006bb3;
+    color: #3388ff;
   }
 #navbarTextColor:hover {
-    color: white;
+    color: #004ab3;
 }
+.navbar-brand,
+.navbar-nav li a {
+    line-height: 80px;
+    height: 80px;
+    padding-top: 0;
+    font-size: 150%;
+    
+}
+#logoConfig {
+     width: 155px;
+    height: 65px;
+    position: center;
+    margin-top: 10px;
+}
+.textOver {
+  display: block;
+  width: 250px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 
 /* buttons and links extension to use brackets: [ click me ] */
 .btn-bracketed::before {
@@ -55,10 +135,56 @@ textarea {
     width: 100%;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-  /* Hide captions */
-  .carousel-caption {
-    display: none
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+  img.bg {
+    left: 50%;
+    margin-left: -512px;   /* 50% */
   }
 }
+
+
+/*NAVBAR on hover dropp */
+.sidebar-nav {
+    padding: 9px 0;
+}
+
+.dropdown-menu .sub-menu {
+    left: 100%;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    margin-top: -1px;
+}
+
+.dropdown-menu li:hover .sub-menu {
+    visibility: visible;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.nav-tabs .dropdown-menu, .nav-pills .dropdown-menu, .navbar .dropdown-menu {
+    margin-top: 0;
+}
+
+.navbar .sub-menu:before {
+    border-bottom: 7px solid transparent;
+    border-left: none;
+    border-right: 7px solid rgba(0, 0, 0, 0.2);
+    border-top: 7px solid transparent;
+    left: -7px;
+    top: 10px;
+}
+.navbar .sub-menu:after {
+    border-top: 6px solid transparent;
+    border-left: none;
+    border-right: 6px solid #fff;
+    border-bottom: 6px solid transparent;
+    left: 10px;
+    top: 11px;
+    left: -6px;
+}
+
+
+

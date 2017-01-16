@@ -1,34 +1,126 @@
-
-
 @model List<Book>
 
 @{
     Layout = "_Layout";
 }
 
+
 <!DOCTYPE html>
 
 <html>
 <head>
-    <title>All Books</title>
+    <title >All Books</title>
+    <style>
+     #backGR{
+          background: url(/images/slika_knjiga3.jpg);
+          background-repeat: no-repeat;
+          background-position: center top;
+          background-attachment: fixed;
+          padding-top: 50px;
+          padding-bottom: 20px;
+
+    }
+    </style>
+
 </head>
-<body>
-    <div>
+<body id="backGR">
+<div>
         
 
 
-        @if (Model != null)
-        {
-            <h1>Books:</h1>
-            foreach (var item in Model)
-            {
-                <p style="margin-left: 30px">
-                    <a asp-controller="Member" asp-action="BookDetails" asp-route-id="@item.BookId">@item.Title, @item.Writer.FirstName @item.Writer.LastName</a>
-                </p>
 
-            }
-        }
 
+</div>
+    
+    <div class="container">
+        <div class="row">
+            <h1 style="margin-top: 50px">Books:</h1>
+            <div role="tabpanel">
+                <div class="col-lg-3 col-sm-4 col-lg-offset-0">
+                    <ul class="nav nav-pills brand-pills nav-stacked" role="tablist">
+                        <li role="presentation" class="brand-nav active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">All books</a></li>
+                        <li role="presentation" class="brand-nav"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Genre 1</a></li>
+                        <li role="presentation" class="brand-nav"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">Genre 2</a></li>
+                        <li role="presentation" class="brand-nav"><a href="#tab4" aria-controls="tab4" role="tab" data-toggle="tab">Genre 3</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-9 col-sm-9">
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="tab1">
+                            <p>
+                                @if (Model != null)
+                                {
+                                    <div class="row">
+                                        @foreach (var item in Model)
+                                        {
+                                            <p style="margin-left: 30px">
+                                             
+                                         </p>
+                                       
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="thumbnail">
+                                                    <img src="/images/logo.png" alt="" style=" width: 242px; height: 200px; ">
+                                                    <div class="caption">
+                                                        <h3 class="textOver"><a asp-controller="Member" asp-action="BookDetails" asp-route-id="@item.BookId"  >@item.Title</a></h3>
+                                                        <p>Author: @item.Writer.LastName, @item.Writer.FirstName </p>
+                                                        <p><input type="submit" value="Borrow" class="btn btn-primary" onclick="location.href='@Url.Action("BorrowBook", "Member",new { id = @item.BookId })'" />
+                                                            <a href="#" class="btn btn-default" role="button">Buy</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            }
+                                        </div>
+                                    }
+                            </p>
+    
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="tab2">
+                            <p>
+                                Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata corpora quaeritis.
+                                Summus brains sit, morbo vel maleficia? De apocalypsi gorger omero undead survivor dictum mauris.
+                                Hi mindless mortuis soulless creaturas, imo evil stalking monstra adventus resi dentevil vultus comedat cerebella viventium.
+                                Qui animated corpse, cricket bat max brucks terribilem incessu zomby.
+                            </p>
+                            <p>
+                                The voodoo sacerdos flesh eater, suscitat mortuos comedere
+                                carnem virus. Zonbi tattered for solum oculi eorum defunctis go lum cerebro. Nescio brains an Undead zombies.
+                                Sicut malus putrid voodoo horror. Nigh tofth eliv ingdead.
+                            </p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="tab3">
+                            <p>
+                                Lorem ipsizzle dolor away amizzle, consectetuer pizzle elizzle. Nullizzle yo velizzle, check it out volutpizzle, quis, gravida vel, yo.
+                                Ma nizzle eget tortor. Sizzle eros. My shizz izzle dolizzle gizzle turpis tempizzle fo shizzle mah nizzle fo rizzle, mah home g-dizzle.
+                                Maurizzle pellentesque nibh izzle own yo'. Check it out in tortor. Pellentesque fizzle rhoncizzle nisi.
+                            </p>
+                            <p>
+                                In hac habitasse platea dictumst. Shizzlin dizzle dapibus. You son of a bizzle tellizzle urna, pretizzle fo shizzle mah nizzle fo rizzle, mah home g-dizzle,
+                                ghetto ac, check it out vitae, nunc. Shizzlin dizzle suscipizzle. Integizzle sempizzle velit sizzle dizzle.
+                            </p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="tab4">
+                            <p>
+                                Collaboratively administrate empowered markets via plug-and-play networks.
+                                Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without
+                                revolutionary ROI.
+                            </p>
+                            <p>
+                                Efficiently unleash cross-media information without cross-media value.
+                                Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar
+                                solutions without functional solutions.
+                            </p>
+                            <p>
+                                Completely synergize resource sucking relationships via premier niche markets. Professionally cultivate
+                                one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service
+                                for state of the art customer service.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

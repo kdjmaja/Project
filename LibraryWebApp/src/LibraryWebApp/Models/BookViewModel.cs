@@ -25,5 +25,8 @@ namespace LibraryWebApp.Models
 
         [Required]
         public string About { get; set; }
+        
+        //public Enum Genre { get; set; }
+
     }
 }

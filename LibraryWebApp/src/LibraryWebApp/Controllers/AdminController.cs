@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using LibraryWebApp.Interfaces;
 using LibraryWebApp.Models;
@@ -63,6 +64,8 @@ namespace LibraryWebApp.Controllers
             {
                 
                 ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
+                //var da = await _userManager.AddClaimAsync(currentUser, new Claim(ClaimTypes.Role, "Administrator"));
+
                 Book item;
                 var pisac = new Writer(m.FirstNameWritter, m.LastNameWritter, DateTime.Now, Guid.Parse(currentUser.Id));
                 var knjiga = _repository.GetAllBooks().FirstOrDefault(p => p.Writer.Equals(pisac));

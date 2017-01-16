@@ -1,5 +1,91 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Register";
 }
+@model RegisterViewModel
+
+@using Microsoft.AspNetCore.Identity
+@using LibraryWebApp.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<head>
+
+</head>
+
+<body>
 
 
+    <center>
+        <cite id="citeText">"A reader lives a thousand lives before he dies."</cite>
+        <p id="pisacText">George R. R. Martin</p>
+    </center>
+    @if (!SignInManager.IsSignedIn(User))
+    {
+        <center>
+            <button id="buttonMy" type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModal">I Want to Be a Member!</button>
+        </center>
+    }
+    else
+    {   
+        <center>
+            <div>
+                <p>
+                    <input id="buttonMy" type="submit" value="Books..." class="btn btn-default" onclick="location.href='@Url.Action("Index", "Member")'" />
+                </p>
+              
+            </div>
+        </center>
+    }
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #3388ff">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Registration...</h4>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Username" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="Username" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+                </form>
+            </div>
+               
+        </div>
+    </div>
+</div>
+    
+
+
+</body>

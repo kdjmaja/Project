@@ -6,13 +6,19 @@
 
 <!DOCTYPE html>
 
-<h2>Book Details</h2>
+<h2 style="margin-top: 100px;">Book Details</h2>
 
 <div>
     @if (Model != null)
     {
             <p>
                 
+                <select class="form-control" id="StudentGender" name="StudentGender">
+                    <option>Select Genre</option>
+                    <option>zanr 1</option>
+                    <option>zanr 2</option>
+                </select>
+
                 Naslov: @Model.Title
                 <br>
                 Autor: @Model.Writer.FirstName @Model.Writer.LastName<br>
