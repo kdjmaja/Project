@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -32,5 +33,7 @@ namespace LibraryWebApp.Models
         public SelectList StatusList { get; set; }
 
         public List<Book> Books { get; set; }
+
+        public IFormFile image { get; set; }
     }
 }

@@ -44,6 +44,15 @@ namespace LibraryWebApp.Models
 
             item.Counter = book.Counter;
             item.About = book.About;
+            var writers = GetAllWriters();
+            foreach(var writer in writers)
+            {
+                if(writer.FirstName.Equals(book.Writer.FirstName) && writer.LastName.Equals(book.Writer.LastName) && !writer.WriterId.Equals(book.Writer.WriterId))
+                {
+                    item.Writer = writer;
+                    RemoveWriter(book.Writer.WriterId);
+                }
+            }
             item.Writer.FirstName = book.Writer.FirstName;
             item.Writer.LastName = book.Writer.LastName;
 
@@ -58,6 +67,15 @@ namespace LibraryWebApp.Models
             }
             item.Title = book.Title;
             _context.SaveChanges();
+        }
+
+        public bool RemoveWriter(Guid WriterId)
+        {
+            var item = GetWriter(WriterId);
+            if (item == null) return false;
+            _context.Writers.Remove(item);
+            _context.SaveChanges();
+            return true;
         }
 
         public bool Remove(Guid bookId, Guid userId)

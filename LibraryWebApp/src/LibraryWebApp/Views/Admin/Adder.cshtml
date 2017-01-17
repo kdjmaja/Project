@@ -56,7 +56,7 @@
             <div class="modal-body">
 
                 <!-- content goes here -->
-                <form asp-controller="Admin" asp-action="AddBook" method="post" class="form-group">
+                <form asp-controller="Admin" asp-action="AddBook" method="post" class="form-group" enctype = "multipart/form-data">
                     
                     <div class="form-group" style="min-width: 100%">
                         <label for="exampleInputPassword1">Genre</label>
@@ -99,7 +99,7 @@
 
                     <div class="form-group">
                         <label for="exampleInputFile">Book image</label>
-                        <input type="file" id="exampleInputFile">
+                        <input type="file" id="exampleInputFile" asp-for="image">
                         <p class="help-block">Max size: 250x120</p>
                     </div>
                     <div class="checkbox">
