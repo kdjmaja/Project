@@ -38,10 +38,18 @@
             <div role="tabpanel">
                 <div class="col-lg-3 col-sm-4 col-lg-offset-0">
                     <ul class="nav nav-pills brand-pills nav-stacked" role="tablist">
-                        <li role="presentation" class="brand-nav active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">All books</a></li>
+                        <li><a asp-area="" asp-controller="Member" asp-action="Index" id="navbarTextColor">All books</a></li>
+                        <li><a asp-area="" asp-controller="Member" asp-action="BooksOfGenre" asp-route-id="@Genres.Fiction" id="navbarTextColor">Fiction</a></li>
+                        <li><a asp-area="" asp-controller="Member" asp-action="BooksOfGenre" asp-route-id="@Genres.RealisticFiction" id="navbarTextColor">Realistic Fiction</a></li>
+                        <li><a asp-area="" asp-controller="Member" asp-action="BooksOfGenre" asp-route-id="@Genres.Drama" id="navbarTextColor">Drama</a></li>
+                        <li><a asp-area="" asp-controller="Member" asp-action="BooksOfGenre" asp-route-id="@Genres.Comedy" id="navbarTextColor">Comedy</a></li>
+                        <li><a asp-area="" asp-controller="Member" asp-action="BooksOfGenre" asp-route-id="@Genres.Horror" id="navbarTextColor">Horror</a></li>
+                        <li><a asp-area="" asp-controller="Member" asp-action="BooksOfGenre" asp-route-id="@Genres.NonFiction" id="navbarTextColor">Non-Fiction</a></li>
+                        
+                        @*<li role="presentation" class="brand-nav active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">All books</a></li>
                         <li role="presentation" class="brand-nav"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Genre 1</a></li>
                         <li role="presentation" class="brand-nav"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">Genre 2</a></li>
-                        <li role="presentation" class="brand-nav"><a href="#tab4" aria-controls="tab4" role="tab" data-toggle="tab">Genre 3</a></li>
+                        <li role="presentation" class="brand-nav"><a href="#tab4" aria-controls="tab4" role="tab" data-toggle="tab">Genre 3</a></li>*@
                     </ul>
                 </div>
                 <div class="col-lg-9 col-sm-9">

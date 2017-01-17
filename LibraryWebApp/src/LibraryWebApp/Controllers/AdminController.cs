@@ -133,7 +133,6 @@ namespace LibraryWebApp.Controllers
             {
                 
                 ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
-                //var da = await _userManager.AddClaimAsync(currentUser, new Claim(ClaimTypes.Role, "Administrator"));
 
                 Book item;
                 var pisac = new Writer(m.FirstNameWritter, m.LastNameWritter, DateTime.Now, Guid.Parse(currentUser.Id));
@@ -141,11 +140,11 @@ namespace LibraryWebApp.Controllers
                 if (knjiga != null)
                 {
                     Writer pisac1 = knjiga.Writer;
-                    item = new Book(m.Text, pisac1, Guid.Parse(currentUser.Id),m.Counter,m.About);
+                    item = new Book(m.Text, pisac1, Guid.Parse(currentUser.Id),m.Counter,m.About,m.Genre);
                 }
                 else
                 {
-                    item = new Book(m.Text, pisac, Guid.Parse(currentUser.Id),m.Counter,m.About);
+                    item = new Book(m.Text, pisac, Guid.Parse(currentUser.Id),m.Counter,m.About,m.Genre);
                 }
                 _repository.Add(item);
                 return RedirectToAction("Index");
