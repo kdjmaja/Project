@@ -1,0 +1,43 @@
+@model List<LibraryWebApp.Models.ApplicationUser>
+
+    @{
+        ViewData["Title"] = "Mailmen";
+    }
+
+    @{
+        Layout = "_Layout";
+    }
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <title>Mailmen</title>
+    </head>
+    <body>
+        <div>
+
+            @if (Model != null)
+            {
+                <h1>Mailmen:</h1>
+                foreach (var item in Model)
+                {
+                    if (User.Identity.Name.Equals(item.UserName))
+                    {
+                        continue;
+                    }
+                    <p>
+                        @item.UserName     @item.Email
+
+                        
+                        <a asp-controller="Admin" asp-action="RemoveMailman" asp-route-id="@item.Id">Remove Mailman</a>
+
+                        <br />
+                    </p>
+
+                }
+            }
+
+        </div>
+    </body>
+</html>

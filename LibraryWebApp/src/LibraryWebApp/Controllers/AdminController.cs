@@ -7,20 +7,25 @@ using LibraryWebApp.Interfaces;
 using LibraryWebApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 namespace LibraryWebApp.Controllers
 {
+    [Authorize(Policy="Administrators")]
     public class AdminController : Controller
     {
 
         private IBookRepository _repository;
         private UserManager<ApplicationUser> _userManager;
+        private RoleManager<IdentityRole> _roleManager;
 
-        public AdminController(IBookRepository repository, UserManager<ApplicationUser> userManager)
+        public AdminController(IBookRepository repository, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _repository = repository;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
         
         public IActionResult Edit(Guid Id)
@@ -55,6 +60,70 @@ namespace LibraryWebApp.Controllers
         {
             return View("Adder");
 
+        }
+
+        public async Task<IActionResult> Users()
+        {
+            var AllUsers = await _userManager.GetUsersForClaimAsync(new Claim(ClaimTypes.Role, "Member"));
+            var Users = new List<ApplicationUser>();
+            foreach(var user in AllUsers)
+            {
+                var standardClaims = await _userManager.GetClaimsAsync(user);
+                if (standardClaims.Any(p => p.Value.Equals("Admin")) || standardClaims.Any(p => p.Value.Equals("Mailman")))
+                {
+                    continue;
+                }
+                Users.Add(user);
+            }
+            return View(Users);   
+        }
+
+        public async Task<IActionResult> Admins()
+        {
+            var Users = await _userManager.GetUsersForClaimAsync(new Claim(ClaimTypes.Role, "Admin"));
+
+            return View(Users.ToList());
+        }
+        public async Task<IActionResult> Mailmans()
+        {
+            var Users = await _userManager.GetUsersForClaimAsync(new Claim(ClaimTypes.Role, "Mailman"));
+
+            return View(Users.ToList());
+        }
+
+        public async Task<IActionResult> MakeMailman(string Id)
+        {
+            var user = await _userManager.FindByIdAsync(Id);
+            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Mailman"));
+
+            return RedirectToAction("Users");
+        }
+
+
+        public async Task<IActionResult> MakeAdmin(string Id)
+        {
+            var user = await _userManager.FindByIdAsync(Id);
+            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Admin"));
+            return RedirectToAction("Users");
+
+        }
+
+        public async Task<IActionResult> RemoveMailman(string Id)
+        {
+            var user = await _userManager.FindByIdAsync(Id);
+            await _userManager.RemoveClaimAsync(user, new Claim(ClaimTypes.Role, "Mailman"));
+
+            return RedirectToAction("Users");
+        }
+
+        public async Task<IActionResult> RemoveAdmin(string Id)
+        {
+            var user = await _userManager.FindByIdAsync(Id);
+            var standardClaims = await _userManager.GetClaimsAsync(user);
+            await _userManager.RemoveClaimAsync(user, new Claim(ClaimTypes.Role, "Admin"));
+            var stdClaims = await _userManager.GetClaimsAsync(user);
+
+            return RedirectToAction("Users");
         }
 
         [HttpPost]

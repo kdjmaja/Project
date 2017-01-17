@@ -6,6 +6,9 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,18 +49,28 @@
                 <li><a asp-area="" asp-controller="Home" asp-action="About" id="navbarTextColor">About</a></li>
                 <li><a asp-area="" asp-controller="Home" asp-action="Contact" id="navbarTextColor">Contact</a></li>
                 <li><a href="#">Link</a></li>
+                
+                @if(User.Claims.Any(s => s.Value.Equals("Admin"))){ 
                 <li class="dropdown">
                     <a id="navbarTextColor" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Managing<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a asp-area="" asp-controller="Admin" asp-action="Add" id="navbarTextColor" >Add/Delete book</a></li>
-                        
-                        <li><a href="#">Something else here</a></li>
+                        <li><a asp-area="" asp-controller="Admin" asp-action="Add" id="navbarTextColor">Add/Delete book</a></li>
+
+                        <li><a asp-area="" asp-controller="Admin" asp-action="Users" id="navbarTextColor">Manage users</a></li>
+                        <li><a asp-area="" asp-controller="Admin" asp-action="Admins" id="navbarTextColor">Manage admins</a></li>
+                        <li><a asp-area="" asp-controller="Admin" asp-action="Mailmans" id="navbarTextColor">Manage mailmen</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">Separated link</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">One more separated link</a></li>
                     </ul>
                 </li>
+                }
+
+
+
+                
+
             </ul>
             <form class="navbar-form navbar-left" style="padding-top: 15px">
                 <div class="form-group" >
