@@ -21,10 +21,14 @@ namespace LibraryWebApp.Models
     {
         //knjiznicar pri unosu nove knjige
         public string Title { get; set; }
-        public int Counter { get; set; }
         public Guid BookId { get; set; }
         public Writer Writer { get; set; }
         public List<Posudba> Posudbe { get; set; }
+        public int BorrowCounter { get; set; }
+        public int SaleCounter { get; set; }
+        public bool ZaKupnju { get; set; }
+        public bool ZaPosudbu { get; set; }
+        public double Price { get; set; }
 
         //dinamicki unosi
         public string About { get; set; }
@@ -35,22 +39,34 @@ namespace LibraryWebApp.Models
         {
             
         }
-        public Book(string title, Writer writer, Guid userId, int counter, string about)
+        public Book(string title, Writer writer, Guid userId, int salecounter,int borrowcounter, string about,
+            bool zakupnju,bool zaposudbu,double price)
         {
             Title = title;
             Writer = writer;
             BookId = Guid.NewGuid();
             UserId = userId;
             Posudbe = new List<Posudba>();
-            Counter = counter;
+            BorrowCounter = borrowcounter;
+            SaleCounter = salecounter;
             About = about;
+            ZaKupnju = zakupnju;
+            ZaPosudbu = zaposudbu;
+            Price = price;
 
         }
 
 
-        public bool IsAvailable()
+        public bool IsAvailableForBorrowing()
         {
-            if (Counter > 0) return true;
+            if (BorrowCounter > 0) return true;
+
+            return false;
+        }
+
+        public bool IsAvailableForSale()
+        {
+            if (SaleCounter > 0) return true;
 
             return false;
         }

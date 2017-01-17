@@ -25,13 +25,19 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="Counter" class="col-md-2 control-label"></label>
+                <label asp-for="SaleCounter" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <input asp-for="Counter" class="form-control" />
-                    <span asp-validation-for="Counter" class="text-danger" />
+                    <input asp-for="SaleCounter" class="form-control" />
+                    <span asp-validation-for="SaleCounter" class="text-danger" />
                 </div>
             </div>
-
+            <div class="form-group">
+                <label asp-for="BorrowCounter" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="BorrowCounter" class="form-control" />
+                    <span asp-validation-for="BorrowCounter" class="text-danger" />
+                </div>
+            </div>
             <div class="form-group">
                 <label asp-for="About" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
@@ -41,7 +47,7 @@
             </div>
             
             <div class="form-group">
-                <label asp-for="Writer.FirstName" class="col-md-2 control-label"></label>
+                <label asp-for="Writer" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
                     <input asp-for="Writer.FirstName" class="form-control" />
                     <span asp-validation-for="Writer.FirstName" class="text-danger" />

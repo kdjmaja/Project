@@ -22,7 +22,7 @@
         <h1>Books:</h1>
         foreach (var item in Model)
         {
-            <p>Ime knjige: @item.Title Pisac: @item.Writer.FirstName @item.Writer.LastName Kolicina: @item.Counter
+            <p>Ime knjige: @item.Title Pisac: @item.Writer.FirstName @item.Writer.LastName Kolicina za posudivanje: @item.BorrowCounter Kolicina za kupovanje: @item.SaleCounter
             <a asp-controller="Admin" asp-action="DeleteBook" asp-route-id="@item.BookId">Delete Book</a>
             <a asp-controller="Admin" asp-action="Edit" asp-route-id="@item.BookId">Edit Book</a></p>
 

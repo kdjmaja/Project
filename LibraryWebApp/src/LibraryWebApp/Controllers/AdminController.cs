@@ -62,24 +62,41 @@ namespace LibraryWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
-                //var da = await _userManager.AddClaimAsync(currentUser, new Claim(ClaimTypes.Role, "Administrator"));
 
                 Book item;
                 var pisac = new Writer(m.FirstNameWritter, m.LastNameWritter, DateTime.Now, Guid.Parse(currentUser.Id));
                 var knjiga = _repository.GetAllBooks().FirstOrDefault(p => p.Writer.Equals(pisac));
+
                 if (knjiga != null)
                 {
+
                     Writer pisac1 = knjiga.Writer;
-                    item = new Book(m.Text, pisac1, Guid.Parse(currentUser.Id),m.Counter,m.About);
+                    item = new Book(m.Text, pisac1, Guid.Parse(currentUser.Id), m.Counter, m.About, m.Genre);
                 }
                 else
                 {
-                    item = new Book(m.Text, pisac, Guid.Parse(currentUser.Id),m.Counter,m.About);
+                    item = new Book(m.Text, pisac, Guid.Parse(currentUser.Id), m.Counter, m.About, m.Genre);
                 }
-                _repository.Add(item);
-                return RedirectToAction("Index");
+
+                var test = _repository.GetAllBooks().FirstOrDefault(a => (a.Title.Equals(item.Title) &&
+                a.Writer.FirstName.Equals(item.Writer.FirstName) && a.Writer.LastName.Equals(item.Writer.LastName)));
+
+                if (test == null)
+                {
+                    _repository.Add(item);
+                }
+                else
+                {
+                    test.Counter += item.Counter;
+                    _repository.Update(test, test.UserId);
+                }
+
+
+
+
+                return RedirectToAction("Add");
             }
 
             return View("Adder", m);

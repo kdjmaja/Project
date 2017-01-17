@@ -16,12 +16,13 @@ namespace LibraryWebApp.Models
         public DateTime DanVracanja { get; set; }
         public bool Active { get; set; }
         public string Username { get; set; }
+        public bool ZaKupnju;
 
         public Posudba()
         {
             
         }
-        public Posudba(Book book, Guid userId, string username)
+        public Posudba(Book book, Guid userId, string username,bool zakupnju)
         {
             Book = book;
             Title = book.Title;
@@ -32,6 +33,7 @@ namespace LibraryWebApp.Models
             DanVracanja = DanPosudbe.AddMonths(1);
             Active = true;
             Username = username;
+            ZaKupnju = zakupnju;
         }
 
         public override bool Equals(object obj)

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Net.Cache;
 using System.Threading.Tasks;
 using LibraryWebApp.Interfaces;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 
 namespace LibraryWebApp.Models
 {
@@ -24,12 +26,17 @@ namespace LibraryWebApp.Models
             return item;
         }
 
+        //PITATI ZA QUANTITY
         public void Add(Book bookItem)
-        {
+        {   
+            //treba dodati citanje iz checkboxova i textboxova
             if(bookItem == null) throw new ArgumentNullException();
-            if (_context.Books.Any(s => s.BookId.Equals(bookItem.BookId)))
-                bookItem.Counter++;
-
+            if (_context.Books.Any(s => s.BookId.Equals(bookItem.BookId) && s.ZaPosudbu == true))
+                bookItem.BorrowCounter++;
+                    //+=quantity;
+            else if ((_context.Books.Any(s => s.BookId.Equals(bookItem.BookId) && s.ZaKupnju == true)))
+                bookItem.SaleCounter++;
+                    //+=quantity;
             else
             {
                 _context.Books.Add(bookItem);
@@ -42,7 +49,8 @@ namespace LibraryWebApp.Models
             var item = Get(book.BookId);
             _context.Books.Attach(item);
 
-            item.Counter = book.Counter;
+            item.BorrowCounter = book.BorrowCounter;
+            item.SaleCounter = book.SaleCounter;
             item.About = book.About;
             item.Writer.FirstName = book.Writer.FirstName;
             item.Writer.LastName = book.Writer.LastName;
@@ -73,10 +81,29 @@ namespace LibraryWebApp.Models
             return true;
         }
 
+        //dovrsiti
+        public bool Kupi(Guid bookId, Guid userId, string username)
+        {
+            var knjiga = Get(bookId);
+            var buy = new Posudba(knjiga, userId, username, false);
+            if (knjiga.Posudbe == null)
+            {
+                knjiga.Posudbe = new List<Posudba>();
+            }
+            if (knjiga.Posudbe.FirstOrDefault(p => p.Username == username) == null ||
+                knjiga.Posudbe.FirstOrDefault(p => p.Username == username).Active == false)
+            {
+                knjiga.Posudbe.Add(buy);
+                Update(knjiga, userId);
+                return true;
+            }
+            return false;
+        }
+
         public bool Posudi(Guid bookId, Guid userId, string username)
         {
             var knjiga = Get(bookId);
-            var borrow = new Posudba(knjiga, userId, username);
+            var borrow = new Posudba(knjiga, userId, username,false);
             if (knjiga.Posudbe == null)
             {
                 knjiga.Posudbe = new List<Posudba>();
@@ -117,7 +144,8 @@ namespace LibraryWebApp.Models
             else
             {
                 item.About = book.About;
-                item.Counter = book.Counter;
+                item.BorrowCounter = book.BorrowCounter;
+                item.SaleCounter = book.SaleCounter;
                 item.Posudbe = book.Posudbe.ToList();
 
             }
@@ -142,6 +170,7 @@ namespace LibraryWebApp.Models
             }
             return posudbe;
         }
+
         public List<Posudba> SvePosudbe()
         {
             var books = GetAllBooks();

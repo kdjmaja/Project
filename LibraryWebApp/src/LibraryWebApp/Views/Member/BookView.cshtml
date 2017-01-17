@@ -27,10 +27,12 @@
                 <h5 style="margin-left: 30px">
                     @Model.About<br>
                 </h5>
-                Kolicina: @Model.Counter<br>
+                Dostupno za posuðivanje: @Model.BorrowCounter<br>
+                Dostupno za kupnju: @Model.SaleCounter<br>
                    
                 <input type="submit" value="Posudi knjigu" class="btn btn-primary btn-lg"  onclick="location.href='@Url.Action("BorrowBook", "Member",new { id = @Model.BookId })'" />
-                
+                <input type="submit" value="Kupi knjigu-dodaj u kosaricu" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("BuyBook", "Member",new { id = @Model.BookId })'" />
+
             </p>
     }
 </div>
@@ -38,3 +40,4 @@
     @Html.ActionLink("Edit", "Index", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>
 </div>
+

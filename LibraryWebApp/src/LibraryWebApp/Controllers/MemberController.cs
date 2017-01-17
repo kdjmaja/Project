@@ -37,6 +37,16 @@ namespace LibraryWebApp.Controllers
 
         }
 
+        //NIJE DOVRSENO!
+        public async Task<IActionResult> BuyBook(Guid Id)
+        {
+            ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            bool uspjelo = _repository.Posudi(Id, Guid.Parse(currentUser.Id), currentUser.UserName);
+            return RedirectToAction("Index");
+
+
+        }
+
         public async Task<IActionResult> Produzi(Guid Id)
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);

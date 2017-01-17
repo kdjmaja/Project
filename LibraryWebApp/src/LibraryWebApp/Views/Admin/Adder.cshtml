@@ -21,7 +21,7 @@
 
                 <!-- content goes here -->
                 <form asp-controller="Admin" asp-action="AddBook" method="post" class="form-group">
-                    
+
                     <div class="form-group" style="min-width: 100%">
                         <label for="exampleInputPassword1">Genre</label>
                         @Html.DropDownList("BookGenre",
@@ -31,29 +31,52 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Title</label>
-                        <textarea id="exampleInputEmail1" spellcheck="false" class="form-control" style="min-width: 100%" rows="1"  placeholder="Book title" asp-for="Text"></textarea>
-                        <strong><span class="text-danger" asp-validation-for="Text"></span></strong><br/>
+                        <textarea id="exampleInputEmail1" spellcheck="false" class="form-control" style="min-width: 100%" rows="1" placeholder="Book title" asp-for="Text"></textarea>
+                        <strong><span class="text-danger" asp-validation-for="Text"></span></strong><br />
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Author firstname</label>
-                        <textarea id="exampleInputEmail1" spellcheck="false" class="form-control" style="min-width: 100%"  rows="1" placeholder="Author firstname" asp-for="FirstNameWritter"></textarea>
-                        <strong><span class="text-danger" asp-validation-for="FirstNameWritter"></span></strong><br/>
+                        <textarea id="exampleInputEmail2" spellcheck="false" class="form-control" style="min-width: 100%" rows="1" placeholder="Author firstname" asp-for="FirstNameWritter"></textarea>
+                        <strong><span class="text-danger" asp-validation-for="FirstNameWritter"></span></strong><br />
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Author lastname</label>
-                        <textarea id="exampleInputEmail1" spellcheck="false" class="form-control" style="min-width: 100%" rows="1" placeholder="Author lastname" asp-for="LastNameWritter"></textarea>
-                        <strong><span class="text-danger" asp-validation-for="LastNameWritter"></span></strong><br/>
+                        <textarea id="exampleInputEmail3" spellcheck="false" class="form-control" style="min-width: 100%" rows="1" placeholder="Author lastname" asp-for="LastNameWritter"></textarea>
+                        <strong><span class="text-danger" asp-validation-for="LastNameWritter"></span></strong><br />
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">About</label>
-                        <textarea id="exampleInputEmail1" spellcheck="false" class="form-control" style="min-width: 100%" maxlength="1000" rows="3" placeholder="About" asp-for="About"></textarea>
-                        <strong><span class="text-danger" asp-validation-for="About"></span></strong><br/>
+                        <textarea id="exampleInputEmail4" spellcheck="false" class="form-control" style="min-width: 100%" maxlength="1000" rows="3" placeholder="About" asp-for="About"></textarea>
+                        <strong><span class="text-danger" asp-validation-for="About"></span></strong><br />
                     </div>
                     <div class="form-group">
+                        <label for="PriceId">Price</label>
+                        <textarea id="PriceId" spellcheck="false" class="form-control" style="min-width: 100%" rows="3" placeholder="Price" asp-for="Price"></textarea>
+                        <strong><span class="text-danger" asp-validation-for="Price"></span></strong><br />
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox" style="float:left">
+                            <label>
+                                <input type="checkbox"> For sale
+                            </label>
+                        </div>
                         <label for="exampleInputEmail1">Quantity</label>
-                        <textarea id="exampleInputEmail1" spellcheck="false" class="form-control" style="min-width: 100%" rows="1" placeholder="Number of books to add" asp-for="Counter"></textarea>
-                        <strong><span class="text-danger" asp-validation-for="Counter"></span></strong><br/>
+                        <textarea id="SaleQuantity" spellcheck="false" class="form-control" style="min-width: 60%" rows="1" placeholder="Number of books to add for sale" asp-for="SaleCounter"></textarea>
+                        <strong><span class="text-danger" asp-validation-for="SaleCounter"></span></strong><br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox" style="float:left">
+                            <label>
+                                <input type="checkbox" runat="server" id="checkboxBorrowing"> For borrowing
+                            </label>
+                        </div>
+                        <label>
+                            <input type="text" runat="server" id="BorrowQuantity">Quantity
+                        </label>
+                        <input type="checkbox">
+                        <textarea id="BorrowQuantityArea" spellcheck="false" class="form-control" style="min-width: 60%" rows="1" placeholder="Number of books to add for borrowing" asp-for="BorrowCounter"></textarea>
+                        <strong><span class="text-danger" asp-validation-for="BorrowCounter"></span></strong><br/>
                     </div>
 
                     <div class="form-group">
@@ -61,25 +84,20 @@
                         <input type="file" id="exampleInputFile">
                         <p class="help-block">Max size: 250x120</p>
                     </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> For sale
-                        </label>
-                    </div>
+       
 
-
-                    <div class="modal-footer">
-                        <div class="btn-group btn-group-justified" role="group" aria-label="group button">
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-default" data-dismiss="modal" role="button">Close</button>
-                            </div>
-                            <div class="btn-group" role="group">
-                                <button type="submit" class="btn btn-default">Add</button>
-                            </div>
-                        </div>
+            <div class="modal-footer">
+                <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" role="button">Close</button>
                     </div>
-                </form>
+                    <div class="btn-group" role="group">
+                        <button type="submit" class="btn btn-default">Add</button>
+                    </div>
+                </div>
             </div>
+            </form>
+        </div>
 
         </div>
     </div>

@@ -21,11 +21,23 @@ namespace LibraryWebApp.Models
         public string LastNameWritter { get; set; }
 
         [Required]
-        public int Counter { get; set; }
+        public int BorrowCounter { get; set; }
+
+        [Required]
+        public int SaleCounter { get; set; }
+
+        [Required]
+        public bool ZaKupnju { get; set; }
+
+        [Required]
+        public bool ZaPosudbu { get; set; }
 
         [Required]
         public string About { get; set; }
-        
+
+        [Required]
+        public double Price { get; set; }
+
         //public Enum Genre { get; set; }
 
     }
