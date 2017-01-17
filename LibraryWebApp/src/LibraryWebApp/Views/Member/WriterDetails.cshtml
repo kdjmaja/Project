@@ -6,31 +6,44 @@
 
 <!DOCTYPE html>
 
-<html>
-<head>
-    <title>All Writers</title>
-</head>
-<body>
-    <div>
+<h2 style="margin-top: 100px; text-align:center; background-color:antiquewhite; margin-left:30%; margin-right:30%">Writer</h2>
 
-
-
-        @if (Model != null)
-        {
-            <h1>Writer:</h1>
-            <p>
-                @Model.LastName, @Model.FirstName<br>
-                @Model.Birthday.ToShortDateString()<br>
-                @Model.AboutWriter<br>
-                Djela:<br>
-                @foreach(var item in Model.WritersBooks)
+<div style="text-align:center; margin-left:30%; margin-right:30%">
+    @if (Model != null)
+    {
+        <div class="thumbnail">
+           
+            <div class="caption">
+                <h3 style="margin-top: -5px;text-align:center;">
+                    @Model.LastName, @Model.FirstName (@Model.Birthday.ToShortDateString())
+                </h3>
+                <h4>Djela:</h4>
+                @foreach (var book in Model.WritersBooks)
                 {
-                    @item.Title<br>
+                    <a asp-action="BookDetails" asp-controller="Member" asp-route-id="@book.BookId">@book.Title</a>
 
                 }
-            </p>
-        }
 
-    </div>
-</body>
-</html>
+            </div>
+            @*<p>
+
+                    Naslov: @Model.Title
+                    <br>
+                    Autor: @Model.Writer.FirstName @Model.Writer.LastName<br>
+                    Genre: @Model.Genre<br>
+                    About:<br>
+                    <h5 style="margin-left: 30px">
+                        @Model.About<br>
+                    </h5>
+                    Kolicina: @Model.Counter<br>
+
+                    <input type="submit" value="Posudi knjigu" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("BorrowBook", "Member",new { id = @Model.BookId })'" />
+
+                </p>*@
+
+
+            @*@Html.ActionLink("Edit", "Index", new { /* id = Model.PrimaryKey */ }) |*@
+            <a asp-action="AllWriters">Back to List</a>
+        </div>
+    }
+</div>
