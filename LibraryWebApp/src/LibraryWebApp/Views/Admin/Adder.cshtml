@@ -1,5 +1,9 @@
-﻿@model BookViewModel
-
+﻿@using Microsoft.EntityFrameworkCore.Query.Expressions
+@using Remotion.Linq.Parsing.Structure.NodeTypeProviders
+@model BookViewModel
+@{
+    Layout = "_Layout";
+}
 @{
     ViewData["Title"] = "Adder";
 
@@ -7,7 +11,39 @@
 <head>
     <meta charset="utf-8" />
 </head>
-<div class="center" style="padding-top: 50px"><button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary center-block">Add Book</button></div>
+<div class="center" style="padding-top: 50px"><button data-toggle="modal" id="navbarButton" data-target="#squarespaceModal" class="btn btn-primary  center-block btn-lg">Add new book</button></div>
+
+<div class="container" style="background: #cccccc; margin-top: 50px; border-radius: 10px;">
+    <table class="table table-striped">
+        <thead>
+         <th>#</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Delete</th>
+        <th>Edit</th>
+        </thead>
+        <tbody>
+        @{
+            int a = 0;
+        if (Model != null)
+        {
+            foreach (var item in Model.Books)
+            {
+                <tr>
+                    <td>@a</td>
+                    <td>@item.Title</td>
+                    <td>@item.Writer.LastName, @item.Writer.FirstName</td>
+                    <td ><input type="submit" id="navbarButton" value="Delete" class="btn btn-primary" onclick="location.href = '@Url.Action("DeleteBook", "Admin", new {id = @item.BookId})'"/></td>
+                    <td><input type="submit" id="navbarButton" value="Edit book" class="btn btn-primary" onclick="location.href = '@Url.Action("Edit", "Admin", new {id = @item.BookId})'"/></td>
+                </tr>
+                a++;
+            }
+        }
+
+}
+        </tbody>
+    </table>
+</div>
 
 <!-- line modal -->
 <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -24,10 +60,15 @@
 
                     <div class="form-group" style="min-width: 100%">
                         <label for="exampleInputPassword1">Genre</label>
-                        @Html.DropDownList("BookGenre",
-                            new SelectList(Enum.GetValues(typeof(Genre))),
+
+                    @Html.DropDownListFor(m => Model.Genre,
+                            new SelectList(Enum.GetValues(typeof(Genres))),
                             "Select Genre",
                             new { @class = "form-control" })
+
+                            
+
+                        
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Title</label>

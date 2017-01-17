@@ -33,8 +33,9 @@ namespace LibraryWebApp.Controllers
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory, RoleManager<IdentityRole> roleManager)
         {
+            _roleManager = roleManager;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -116,6 +117,12 @@ namespace LibraryWebApp.Controllers
                     var result = await _userManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
+                    await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Member"));
+
+                    if (user.Email.Equals("maja.krmpotic96@gmail.com") || model.Password.Equals("aaaaaa"))
+                    {
+                        await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Admin"));
+                    }
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
                     // Send an email with this link
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

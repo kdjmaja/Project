@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace LibraryWebApp
 {
@@ -64,6 +65,16 @@ namespace LibraryWebApp
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+            services.AddAuthorization(options =>
+            {
+
+                options.AddPolicy("Administrators", policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
+                options.AddPolicy("Members", policy => policy.RequireClaim(ClaimTypes.Role, "Member"));
+                options.AddPolicy("Mailmans", policy => policy.RequireClaim(ClaimTypes.Role, "Mailman"));
+
+            });
+
+
 
             services.AddMvc(options =>
             {

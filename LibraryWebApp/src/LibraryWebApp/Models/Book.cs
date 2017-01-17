@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace LibraryWebApp.Models
 {
 
-    public enum Genre
+    public enum Genres
     {
         Fiction,
         Comedy,
@@ -29,6 +29,7 @@ namespace LibraryWebApp.Models
         public bool ZaKupnju { get; set; }
         public bool ZaPosudbu { get; set; }
         public double Price { get; set; }
+        public Genres Genre { get; set; }
 
         //dinamicki unosi
         public string About { get; set; }
@@ -39,8 +40,8 @@ namespace LibraryWebApp.Models
         {
             
         }
-        public Book(string title, Writer writer, Guid userId, int salecounter,int borrowcounter, string about,
-            bool zakupnju,bool zaposudbu,double price)
+        public Book(string title, Writer writer, Guid userId, string about, Genres genre,
+            int salecounter, int borrowcounter, bool zakupnju, bool zaposudbu, double price)
         {
             Title = title;
             Writer = writer;
@@ -53,7 +54,7 @@ namespace LibraryWebApp.Models
             ZaKupnju = zakupnju;
             ZaPosudbu = zaposudbu;
             Price = price;
-
+            Genre = genre;
         }
 
 

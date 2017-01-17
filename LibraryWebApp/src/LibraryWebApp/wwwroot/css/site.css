@@ -15,6 +15,19 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+#tablistColor {
+     background: #f2f2f2;
+    border-radius: 10px;
+
+}
+#tablistColor:hover {
+    transition: 100ms ease-in;
+    background-color: #303136;
+    border-radius: 10px;
+
+}
+
+
 #buttonMy {
     background: transparent;
     margin-top: 100px;
@@ -30,6 +43,7 @@
 
 }
 #buttonMy:hover {
+    transition:200ms ease-in;
     background: white;
     color: #333333;
 }
@@ -50,6 +64,12 @@ textarea {
     color: #f2f2f2;
     line-height: 3em;
 
+}
+
+#aboutText {
+    color: #f2f2f2;
+    text-shadow: 2px 1px 4px black;
+    text-align: center;
 }
 #pisacText {
     font-size: 500%;
@@ -87,6 +107,7 @@ textarea {
     background: #004ab3;
 }
 
+
 /* Dodano za projekt */
 #navbarTextColor{
     color: #3388ff;
@@ -103,10 +124,15 @@ textarea {
     
 }
 #logoConfig {
+    opacity: 0.9;
+    transition:opacity 150ms ease-in;
      width: 155px;
     height: 65px;
     position: center;
     margin-top: 10px;
+}
+#logoConfig:hover {
+    opacity: 1;
 }
 .textOver {
   display: block;

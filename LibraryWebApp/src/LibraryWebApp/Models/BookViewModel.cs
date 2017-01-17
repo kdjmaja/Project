@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -37,8 +38,11 @@ namespace LibraryWebApp.Models
 
         [Required]
         public double Price { get; set; }
+   
+        public Genres Genre { get; set; }
 
-        //public Enum Genre { get; set; }
+        public SelectList StatusList { get; set; }
 
+        public List<Book> Books { get; set; }
     }
 }

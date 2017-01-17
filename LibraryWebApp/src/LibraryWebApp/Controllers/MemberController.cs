@@ -81,7 +81,18 @@ namespace LibraryWebApp.Controllers
             return View("BookView", item);
         }
 
-
+        public IActionResult BooksOfGenre(Genres Id)
+        {
+            var items = _repository.GetAllBooks();
+            List<Book> item = new List<Book>();
+            foreach(var book in items)
+            {
+                if (book.Genre == Id)
+                    item.Add(book);
+            }
+            item.Reverse();
+            return View("Index",item);
+        }
 
     }
 }

@@ -24,6 +24,7 @@ namespace LibraryWebApp
             modelBuilder.Entity<Book>().HasKey(s => s.BookId);
             modelBuilder.Entity<Book>().Property(s => s.Title).IsRequired();
             modelBuilder.Entity<Book>().Property(s => s.Price).IsRequired();
+            modelBuilder.Entity<Book>().Property(s => s.Genre).IsRequired();
             modelBuilder.Entity<Book>().HasMany(s => s.Posudbe).WithRequired(s => s.Book);
 
             modelBuilder.Entity<Book>().HasOptional(s => s.Writer).WithMany(p => p.WritersBooks);

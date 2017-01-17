@@ -1,0 +1,38 @@
+@model List<LibraryWebApp.Models.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Users</title>
+</head>
+<body>
+    <div>
+
+        @if (Model != null)
+        {
+            <h1>Users:</h1>
+            foreach (var item in Model)
+            {
+                <p>
+                    @item.UserName     @item.Email
+                    <a asp-controller="Admin" asp-action="MakeAdmin" asp-route-id="@item.Id">Make Admin</a>
+                    |
+                    <a asp-controller="Admin" asp-action="MakeMailman" asp-route-id="@item.Id">Make Mailman</a>
+                    <br />
+                </p>
+
+            }
+        }
+
+    </div>
+</body>
+</html>
