@@ -27,7 +27,8 @@ namespace LibraryWebApp.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
-        
+
+
         public IActionResult Edit(Guid Id)
         {
             if (ModelState.IsValid)
@@ -57,8 +58,10 @@ namespace LibraryWebApp.Controllers
         }
 
         public IActionResult Add()
-        {
-            return View("Adder");
+        {   
+            BookViewModel m = new BookViewModel();
+            m.Books = _repository.GetAllBooks();
+            return View("Adder",m);
 
         }
 
@@ -133,7 +136,6 @@ namespace LibraryWebApp.Controllers
             {
                 
                 ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
-                //var da = await _userManager.AddClaimAsync(currentUser, new Claim(ClaimTypes.Role, "Administrator"));
 
                 Book item;
                 var pisac = new Writer(m.FirstNameWritter, m.LastNameWritter, DateTime.Now, Guid.Parse(currentUser.Id));
@@ -141,14 +143,16 @@ namespace LibraryWebApp.Controllers
                 if (knjiga != null)
                 {
                     Writer pisac1 = knjiga.Writer;
-                    item = new Book(m.Text, pisac1, Guid.Parse(currentUser.Id),m.Counter,m.About);
+                    item = new Book(m.Text, pisac1, Guid.Parse(currentUser.Id),m.Counter,m.About,m.Genre);
                 }
                 else
                 {
-                    item = new Book(m.Text, pisac, Guid.Parse(currentUser.Id),m.Counter,m.About);
+                    item = new Book(m.Text, pisac, Guid.Parse(currentUser.Id),m.Counter,m.About,m.Genre);
                 }
+                
                 _repository.Add(item);
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Add");
             }
 
             return View("Adder", m);
@@ -159,7 +163,7 @@ namespace LibraryWebApp.Controllers
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
             _repository.Remove(Id, Guid.Parse(currentUser.Id));
-            return RedirectToAction("Index");
+            return RedirectToAction("Add");
 
         }
 
