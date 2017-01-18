@@ -6,32 +6,59 @@
 
 <!DOCTYPE html>
 
-<h2 style="margin-top: 100px;">Book Details</h2>
+<h2 style="margin-top: 100px; text-align:center; background-color:antiquewhite; margin-left:30%; margin-right:30%">Book Details</h2>
 
-<div>
+<div style="text-align:center; margin-left:30%; margin-right:30%">
     @if (Model != null)
     {
-            <p>
+            <div class="thumbnail">
+                <div class="thumbnail">
+                    @if (Model.ImgPath == null)
+                    {
+                        <img src="/images/logo1.png" alt="" style="width: 242px; height: 300px;">
+                    }
+                    else
+                    {
+                        <img src="~/images/bookimages/@Model.ImgPath" alt="" style="width: 242px; height: 300px;">
+                    }
 
-                Naslov: @Model.Title
-                <br>
-                Autor: @Model.Writer.FirstName @Model.Writer.LastName<br>
-                Genre: @Model.Genre<br>
-                About:<br>
-                <h5 style="margin-left: 30px">
-                    @Model.About<br>
-                </h5>
-                Dostupno za posuðivanje: @Model.BorrowCounter<br>
-                Dostupno za kupnju: @Model.SaleCounter<br>
-                   
-                <input type="submit" value="Posudi knjigu" class="btn btn-primary btn-lg"  onclick="location.href='@Url.Action("BorrowBook", "Member",new { id = @Model.BookId })'" />
-                <input type="submit" value="Kupi knjigu-dodaj u kosaricu" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("BuyBook", "Member",new { id = @Model.BookId })'" />
+                </div>
+                <div class="caption">
+                    <h3 style="margin-top: -5px;text-align:center;">
+                        @Model.Title
+                    </h3>
+                    <a asp-action="WriterDetails" asp-controller="Member" asp-route-id="@Model.Writer.WriterId">@Model.Writer.FirstName @Model.Writer.LastName</a>
+                    <p>
+                        Genre: @Model.Genre<br />
+                        About: @Model.About<br />
+                        <input type="submit" value="Borrow" class="btn btn-primary" onclick="location.href = '@Url.Action("BorrowBook", "Member", new { id = @Model.BookId })'" />
+                        <a href="#" class="btn btn-default" role="button">Buy</a>
+                    </p>
+                </div>
+                    @*<p>
 
-            </p>
+                        Naslov: @Model.Title
+                        <br>
+                        Autor: @Model.Writer.FirstName @Model.Writer.LastName<br>
+                        Genre: @Model.Genre<br>
+                        About:<br>
+                        <h5 style="margin-left: 30px">
+                            @Model.About<br>
+                        </h5>
+                        Kolicina: @Model.Counter<br>
+
+                        <input type="submit" value="Posudi knjigu" class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("BorrowBook", "Member",new { id = @Model.BookId })'" />
+
+                    </p>*@
+
+
+                    @Html.ActionLink("Edit", "Index", new { /* id = Model.PrimaryKey */ }) |
+                    <a asp-action="Index">Back to List</a>
+                </div>
     }
-</div>
-<div>
-    @Html.ActionLink("Edit", "Index", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+    </div>
+
+
+
+
 
