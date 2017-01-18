@@ -10,7 +10,7 @@ namespace LibraryWebApp.Models
     {
         public Guid UserId { get; set; }
         public string Username { get; set; }
-        public List<Posudba> InCart;
+       // public List<Posudba> Cart { get; set; }
         public double DeliveryPrice { get; set; }
         public double SumOfBooksPrices { get; set; }
         public double Sum { get; set; }
@@ -19,7 +19,7 @@ namespace LibraryWebApp.Models
         {
             UserId = userid;
             Username = username;
-            InCart=new List<Posudba>();
+            //Cart=new List<Posudba>();
             DeliveryPrice = 10;
             SumOfBooksPrices = 0;
             Sum = 0;

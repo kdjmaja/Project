@@ -14,7 +14,7 @@ namespace LibraryWebApp
         public IDbSet<Book> Books { get; set; }
         public IDbSet<Writer> Writers { get; set; }
         public IDbSet<Posudba> Posudbe { get; set; }
-        public IDbSet<Posudba> InCart { get; set; }
+       // public IDbSet<Posudba> Cart { get; set; }
 
         public BookDbContext(string connectionString) : base(connectionString) { }
 
@@ -26,6 +26,7 @@ namespace LibraryWebApp
             modelBuilder.Entity<Book>().Property(s => s.Price).IsRequired();
             modelBuilder.Entity<Book>().Property(s => s.Genre).IsRequired();
             modelBuilder.Entity<Book>().HasMany(s => s.Posudbe).WithRequired(s => s.Book);
+            modelBuilder.Entity<Book>().Property(s => s.ImgPath).IsOptional();
 
             modelBuilder.Entity<Book>().HasOptional(s => s.Writer).WithMany(p => p.WritersBooks);
 
@@ -40,6 +41,7 @@ namespace LibraryWebApp
             modelBuilder.Entity<Posudba>().Property(s => s.DanVracanja);
             modelBuilder.Entity<Posudba>().Property(s => s.Username);
             modelBuilder.Entity<Posudba>().Property(s => s.ZaKupnju);
+
 
 
         }

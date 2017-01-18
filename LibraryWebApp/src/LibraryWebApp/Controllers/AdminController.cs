@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 namespace LibraryWebApp.Controllers
@@ -20,12 +22,15 @@ namespace LibraryWebApp.Controllers
         private IBookRepository _repository;
         private UserManager<ApplicationUser> _userManager;
         private RoleManager<IdentityRole> _roleManager;
+        private IHostingEnvironment _hostingEnvironment;
 
-        public AdminController(IBookRepository repository, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public AdminController(IBookRepository repository, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IHostingEnvironment hostingEnvionment)
         {
             _repository = repository;
             _userManager = userManager;
             _roleManager = roleManager;
+            _hostingEnvironment = hostingEnvionment;
+
         }
 
 
@@ -141,6 +146,26 @@ namespace LibraryWebApp.Controllers
                 var pisac = new Writer(m.FirstNameWritter, m.LastNameWritter, DateTime.Now, Guid.Parse(currentUser.Id));
                 var knjiga = _repository.GetAllBooks().FirstOrDefault(p => p.Writer.Equals(pisac));
 
+                if(m.image != null)
+                {
+
+                    var webRoot = _hostingEnvironment.WebRootPath;
+                    var file = System.IO.Path.Combine(webRoot + "/images/bookimages", m.image.FileName);
+                    using (FileStream fs = new FileStream(file, FileMode.Create))
+                    {
+                        await m.image.CopyToAsync(fs);
+                    }
+                }
+                string path;
+                if (m.image == null)
+                {
+                    path = null;
+                }
+                else
+                {
+                    path = m.image.FileName;
+                }
+
                 if (knjiga != null)
                 {
 
@@ -169,7 +194,6 @@ namespace LibraryWebApp.Controllers
                     test.SaleCounter += item.SaleCounter;
                     _repository.Update(test, test.UserId);
                 }
-
 
                 return RedirectToAction("Add");
             }

@@ -19,13 +19,16 @@ namespace LibraryWebApp.Interfaces
 
         bool Posudi(Guid bookId, Guid userId, string username);
 
+        bool Kupi(Guid bookId, Guid userId, string username);
+
+        List<Posudba> GetAllFromCart(Guid userId);
+
         void Produzi(Guid bookId, Guid userId);
 
         List<Posudba> MojePosubeList(Guid userId);
 
         void Edit(Book book, Guid userId);
 
-        //dohvati sve userove posuđene knjige
         List<Book> GetAllUserBooks(Guid userId);
         
         List<Book> GetAllBooks();
@@ -33,6 +36,9 @@ namespace LibraryWebApp.Interfaces
         List<Writer> GetAllWriters();
 
         Writer GetWriter(Guid writerId);
+
+
+        void RemoveFromCart(Guid Id);
 
 
         //List<Book> GetFiltered(Func<Book, bool> filterFunction, Guid userId);

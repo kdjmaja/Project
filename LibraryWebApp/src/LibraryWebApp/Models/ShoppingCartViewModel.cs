@@ -9,7 +9,7 @@ namespace LibraryWebApp.Models
     public class ShoppingCartViewModel
     {
         [Required]
-        public List<Posudba> InCart { get; set; }
+        public List<Posudba> Cart { get; set; }
         [Required]
         [MaxLength(50)]
         public string UserName { get; set; }

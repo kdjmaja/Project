@@ -26,17 +26,13 @@ namespace LibraryWebApp.Models
             return item;
         }
 
-        //PITATI ZA QUANTITY
         public void Add(Book bookItem)
         {   
-            //treba dodati citanje iz checkboxova i textboxova
             if(bookItem == null) throw new ArgumentNullException();
             if (_context.Books.Any(s => s.BookId.Equals(bookItem.BookId) && s.ZaPosudbu == true))
                 bookItem.BorrowCounter++;
-                    //+=quantity;
             else if ((_context.Books.Any(s => s.BookId.Equals(bookItem.BookId) && s.ZaKupnju == true)))
                 bookItem.SaleCounter++;
-                    //+=quantity;
             else
             {
                 _context.Books.Add(bookItem);
@@ -52,6 +48,15 @@ namespace LibraryWebApp.Models
             item.BorrowCounter = book.BorrowCounter;
             item.SaleCounter = book.SaleCounter;
             item.About = book.About;
+            var writers = GetAllWriters();
+            foreach(var writer in writers)
+            {
+                if(writer.FirstName.Equals(book.Writer.FirstName) && writer.LastName.Equals(book.Writer.LastName) && !writer.WriterId.Equals(book.Writer.WriterId))
+                {
+                    item.Writer = writer;
+                    RemoveWriter(book.Writer.WriterId);
+                }
+            }
             item.Writer.FirstName = book.Writer.FirstName;
             item.Writer.LastName = book.Writer.LastName;
 
@@ -68,6 +73,15 @@ namespace LibraryWebApp.Models
             _context.SaveChanges();
         }
 
+        public bool RemoveWriter(Guid WriterId)
+        {
+            var item = GetWriter(WriterId);
+            if (item == null) return false;
+            _context.Writers.Remove(item);
+            _context.SaveChanges();
+            return true;
+        }
+
         public bool Remove(Guid bookId, Guid userId)
         {
             var item = Get(bookId);
@@ -81,11 +95,10 @@ namespace LibraryWebApp.Models
             return true;
         }
 
-        //dovrsiti
         public bool Kupi(Guid bookId, Guid userId, string username)
         {
             var knjiga = Get(bookId);
-            var buy = new Posudba(knjiga, userId, username, false);
+            var buy = new Posudba(knjiga, userId, username, true,true);
             if (knjiga.Posudbe == null)
             {
                 knjiga.Posudbe = new List<Posudba>();
@@ -93,8 +106,14 @@ namespace LibraryWebApp.Models
             if (knjiga.Posudbe.FirstOrDefault(p => p.Username == username) == null ||
                 knjiga.Posudbe.FirstOrDefault(p => p.Username == username).Active == false)
             {
+                //prebacit kod prave posudbe-kosarica
                 knjiga.Posudbe.Add(buy);
+                knjiga.SaleCounter--;
+
                 Update(knjiga, userId);
+
+                _context.Posudbe.Add(buy);
+               
                 return true;
             }
             return false;
@@ -103,16 +122,22 @@ namespace LibraryWebApp.Models
         public bool Posudi(Guid bookId, Guid userId, string username)
         {
             var knjiga = Get(bookId);
-            var borrow = new Posudba(knjiga, userId, username,false);
+            var borrow = new Posudba(knjiga, userId, username,false,true);
             if (knjiga.Posudbe == null)
             {
                 knjiga.Posudbe = new List<Posudba>();
             }
             if (knjiga.Posudbe.FirstOrDefault(p => p.Username == username) == null ||
                 knjiga.Posudbe.FirstOrDefault(p => p.Username == username).Active == false)
-            {
+            {   
+                //prebacit u kosaricu
                 knjiga.Posudbe.Add(borrow);
+                knjiga.BorrowCounter--;
+
                 Update(knjiga, userId);
+
+                _context.Posudbe.Add(borrow);
+                
                 return true;
             }
             return false;
@@ -207,5 +232,31 @@ namespace LibraryWebApp.Models
         {
             return _context.Books.Include(b => b.Writer).Include(b => b.Posudbe).OrderByDescending(p => p.Title).ToList();
         }
+
+        //mozda maknuti userid
+        public List<Posudba> GetAllFromCart(Guid userId)
+        {
+            return _context.Posudbe.Where(s => s.UserId.Equals(userId)).Include(b => b.Book).Where(c => c.ZaCart).Include(b => b.Writer).OrderByDescending(p => p.Title).ToList();
+        }
+
+        public void RemoveFromCart(Guid Id)
+        {
+            var item = _context.Posudbe.Include(p => p.Book).FirstOrDefault(p => p.PosudbaId.Equals(Id));
+            var book = Get(item.Book.BookId);
+            if (item.ZaKupnju)
+            {
+                book.SaleCounter++;
+            }
+            else
+            {
+                book.BorrowCounter++;
+            }
+            Update(item.Book, item.UserId);
+            _context.Posudbe.Remove(item);
+            _context.SaveChanges();
+
+        }
+
+
     }
 }

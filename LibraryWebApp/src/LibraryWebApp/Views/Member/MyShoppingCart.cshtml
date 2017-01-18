@@ -1,0 +1,45 @@
+﻿@model List<Posudba>
+
+@{
+    ViewData["Title"] = "My shopping cart";
+}
+
+<h1>About to borrow : </h1>
+
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            if (item.ZaCart  && !item.ZaKupnju)
+            {
+                <p>
+                    @item.Title, @item.Writer.FirstName @item.Writer.LastName, @item.DanPosudbe.ToShortDateString() - @item.DanVracanja.ToShortDateString()
+                    <input type="submit" id="navbarButton" value="Remove from cart" class="btn btn-primary" onclick="location.href = '@Url.Action("MakniIzCart", "Member", new {id = @item.PosudbaId})'" />
+                </p>
+            }
+
+        }
+        <h2>About to buy:</h2>
+        foreach (var item in Model)
+        {
+            if (item.ZaCart && item.ZaKupnju)
+            {
+                <p>
+                    @item.Title, @item.Writer.FirstName @item.Writer.LastName, @item.Book.Price
+                    <input type="submit" id="navbarButton" value="Remove from cart" class="btn btn-primary" onclick="location.href = '@Url.Action("MakniIzCart", "Member", new {id = @item.PosudbaId})'" />
+                </p>
+            }
+
+        }
+
+    }
+
+
+<div>
+    <a asp-action="MojePosudbe">Back to my account</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

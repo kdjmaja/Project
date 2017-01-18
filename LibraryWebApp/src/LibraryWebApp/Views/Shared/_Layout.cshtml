@@ -47,6 +47,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav nav-tabs">
                 <li><a asp-area="" asp-controller="Member" asp-action="Index" id="navbarTextColor">Books</a></li>
+                <li><a asp-area="" asp-controller="Member" asp-action="AllWriters" id="navbarTextColor">Writers</a></li>
                 <li><a asp-area="" asp-controller="Home" asp-action="About" id="navbarTextColor">About</a></li>
                 <li><a asp-area="" asp-controller="Home" asp-action="Contact" id="navbarTextColor">Contact</a></li>
                 <li><a href="#">Link</a></li>
@@ -92,7 +93,7 @@
                         <a href="#" class="dropdown-toggle" id="navbarTextColor" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a asp-area="" asp-controller="Member" asp-action="MojePosudbe" id="navbarTextColor">My books</a></li>
-                            <li><a asp-area="" asp-controller="Member" asp-action="MojePosudbe" id="navbarTextColor">My shopping cart</a></li>
+                            <li><a asp-area="" asp-controller="Member" asp-action="GetBasket" id="navbarTextColor">My shopping cart</a></li>
                             <li><a href="#">Something else here</a></li>  
                             <li role="separator" class="divider"></li>
                             <li><a href="#">Settingss</a></li>

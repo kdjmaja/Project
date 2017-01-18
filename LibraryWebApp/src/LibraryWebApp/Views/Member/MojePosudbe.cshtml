@@ -12,7 +12,7 @@
         <h2>Aktivne posudbe:</h2>
         foreach (var item in Model)
         {
-            if (item.Active)
+            if (item.Active && !item.ZaCart && !item.ZaKupnju)
             {
                 <p>
                 @item.Title, @item.Writer.FirstName @item.Writer.LastName, @item.DanPosudbe.ToShortDateString() - @item.DanVracanja.ToShortDateString()
@@ -24,9 +24,12 @@
         <h2>Sve posudbe:</h2>
         foreach (var item in Model)
         {
-            <p>
-                @item.Title, @item.DanPosudbe.ToShortDateString() - @item.DanVracanja.ToShortDateString()
-            </p>
+            if (!item.ZaCart && !item.ZaKupnju)
+            {
+                <p>
+                    @item.Title, @item.DanPosudbe.ToShortDateString() - @item.DanVracanja.ToShortDateString()
+                </p>
+            }
 
         }
         
@@ -37,7 +40,7 @@
     <a asp-action="Index">Back to List</a>
 </div>
 <div>
-    <a asp-action="Index">My shopping cart</a>
+    <a asp-action="GetBasket">My shopping cart</a>
 </div>
 
 @section Scripts {

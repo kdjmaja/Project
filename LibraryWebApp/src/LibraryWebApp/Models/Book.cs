@@ -14,6 +14,7 @@ namespace LibraryWebApp.Models
         Horror,
         NonFiction,
         RealisticFiction,
+        SciFi,
 
     }
 
@@ -24,6 +25,7 @@ namespace LibraryWebApp.Models
         public Guid BookId { get; set; }
         public Writer Writer { get; set; }
         public List<Posudba> Posudbe { get; set; }
+
         public int BorrowCounter { get; set; }
         public int SaleCounter { get; set; }
         public bool ZaKupnju { get; set; }
@@ -34,12 +36,14 @@ namespace LibraryWebApp.Models
         //dinamicki unosi
         public string About { get; set; }
         //broj knjiga 
+        public string ImgPath { get; set; }
 
         public Guid UserId { get; set; }
         public Book()
         {
             
         }
+
         public Book(string title, Writer writer, Guid userId, string about, Genres genre,
             int salecounter, int borrowcounter, bool zakupnju, bool zaposudbu, double price)
         {

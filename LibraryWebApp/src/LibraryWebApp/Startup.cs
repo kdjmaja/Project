@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace LibraryWebApp
 {
@@ -49,6 +51,7 @@ namespace LibraryWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddDirectoryBrowser();
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -98,6 +101,21 @@ namespace LibraryWebApp
             loggerFactory.AddDebug();
 
             app.UseApplicationInsightsRequestTelemetry();
+            app.UseStaticFiles();
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+            Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", "images")),
+                RequestPath = new PathString("/MyImages")
+            });
+
+            app.UseDirectoryBrowser(new DirectoryBrowserOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", "images")),
+                RequestPath = new PathString("/bookimages")
+            });
 
             if (env.IsDevelopment())
             {

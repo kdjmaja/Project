@@ -27,6 +27,12 @@ namespace LibraryWebApp.Controllers
             item.Reverse();
             return View(item);
         }
+        public async Task<IActionResult> GetBasket()
+        {
+            ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            var list = _repository.GetAllFromCart(Guid.Parse(currentUser.Id));
+            return View("MyShoppingCart", list);
+        }
 
         public async Task<IActionResult> BorrowBook(Guid Id)
         {
@@ -37,14 +43,13 @@ namespace LibraryWebApp.Controllers
 
         }
 
-        //NIJE DOVRSENO!
         public async Task<IActionResult> BuyBook(Guid Id)
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
-            bool uspjelo = _repository.Posudi(Id, Guid.Parse(currentUser.Id), currentUser.UserName);
+            bool uspjelo = _repository.Kupi(Id, Guid.Parse(currentUser.Id), currentUser.UserName);
             return RedirectToAction("Index");
 
-
+  
         }
 
         public async Task<IActionResult> Produzi(Guid Id)
@@ -94,5 +99,14 @@ namespace LibraryWebApp.Controllers
             return View("Index",item);
         }
 
+        //NAPRAVITI
+        public async Task<IActionResult> MakniIzCart(Guid Id)
+        {
+            ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            _repository.RemoveFromCart(Id);
+           //_repository.MojePosubeList(Guid.Parse(currentUser.Id)).Where(s=>s.PosudbaId.Equals(Id)).
+            return RedirectToAction("GetBasket");
+
+        }
     }
 }
