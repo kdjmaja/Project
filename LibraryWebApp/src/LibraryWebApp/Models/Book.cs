@@ -45,7 +45,7 @@ namespace LibraryWebApp.Models
         }
 
         public Book(string title, Writer writer, Guid userId, string about, Genres genre,
-            int salecounter, int borrowcounter, bool zakupnju, bool zaposudbu, double price)
+            int salecounter, int borrowcounter, bool zakupnju, bool zaposudbu, double price, string imgPath)
         {
             Title = title;
             Writer = writer;
@@ -59,6 +59,7 @@ namespace LibraryWebApp.Models
             ZaPosudbu = zaposudbu;
             Price = price;
             Genre = genre;
+            ImgPath = imgPath;
         }
 
 

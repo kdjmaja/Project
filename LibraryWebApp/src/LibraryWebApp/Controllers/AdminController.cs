@@ -173,12 +173,12 @@ namespace LibraryWebApp.Controllers
                       //public Book(string title, Writer writer, Guid userId, string about, Genres genre,
                         // int salecounter, int borrowcounter, bool zakupnju, bool zaposudbu, double price)
                     item = new Book(m.Text, pisac1, Guid.Parse(currentUser.Id), m.About, m.Genre,
-                        m.SaleCounter, m.BorrowCounter, m.ZaKupnju, m.ZaPosudbu, m.Price);
+                        m.SaleCounter, m.BorrowCounter, m.ZaKupnju, m.ZaPosudbu, m.Price, path);
                 }
                 else
                 {
                     item = new Book(m.Text, pisac, Guid.Parse(currentUser.Id), m.About, m.Genre,
-                         m.SaleCounter, m.BorrowCounter, m.ZaKupnju, m.ZaPosudbu, m.Price);
+                         m.SaleCounter, m.BorrowCounter, m.ZaKupnju, m.ZaPosudbu, m.Price, path);
                 }
 
                 var test = _repository.GetAllBooks().FirstOrDefault(a => (a.Title.Equals(item.Title) &&
@@ -205,6 +205,13 @@ namespace LibraryWebApp.Controllers
         public async Task<IActionResult> DeleteBook(Guid Id)
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            var book = _repository.Get(Id);
+            if (book.ImgPath != null)
+            {
+                var webRoot = _hostingEnvironment.WebRootPath;
+                var file = System.IO.Path.Combine(webRoot + "/images/bookimages", book.ImgPath);
+                System.IO.File.Delete(file);
+            }
             _repository.Remove(Id, Guid.Parse(currentUser.Id));
             return RedirectToAction("Add");
 
