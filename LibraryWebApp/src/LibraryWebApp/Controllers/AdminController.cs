@@ -193,6 +193,13 @@ namespace LibraryWebApp.Controllers
         public async Task<IActionResult> DeleteBook(Guid Id)
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            var book = _repository.Get(Id);
+            if (book.ImgPath != null)
+            {
+                var webRoot = _hostingEnvironment.WebRootPath;
+                var file = System.IO.Path.Combine(webRoot + "/images/bookimages", book.ImgPath);
+                System.IO.File.Delete(file);
+            }
             _repository.Remove(Id, Guid.Parse(currentUser.Id));
             return RedirectToAction("Add");
 
