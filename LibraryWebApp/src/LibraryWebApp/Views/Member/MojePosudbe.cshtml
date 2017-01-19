@@ -32,17 +32,6 @@
             }
 
         }
-        <h2>All:</h2>
-        foreach (var item in Model)
-        {
-            if (!item.ZaCart && !item.ZaKupnju)
-            {
-                <p>
-                    @item.Title, @item.DanPosudbe.ToShortDateString() - @item.DanVracanja.ToShortDateString()
-                </p>
-            }
-
-        }
         
     }
 </form>

@@ -96,10 +96,28 @@
 
 @if (User.Claims.Any(s => s.Value.Equals("Member")))
 {
-    <p>
+    if (item.IsAvailableForBorrowing() && item.BorrowCounter != 0)
+    {
         <input type="submit" value="Borrow" class="btn btn-primary" onclick=" if (confirm('This item will be added to cart. Is that OK?')) {location.href='@Url.Action("BorrowBook", "Member", new {Id = @item.BookId})' ;} " />
+
+    }
+    else
+    {
+        <input type="submit" value="Borrow" class="btn btn-primary" onclick="return false;" />
+
+    }
+    if (item.IsAvailableForSale() && item.SaleCounter != 0)
+    {
         <input type="submit" value="Buy" class="btn btn-primary" onclick=" if (confirm('This item will be added to cart. Is that OK?')) { location.href='@Url.Action("BuyBook", "Member", new {Id = @item.BookId})' ;} " />
-    </p>
+
+    }
+    else
+    {
+        <input type="submit" value="Buy" class="btn btn-primary" onclick="return false;" />
+
+    }
+
+
 
 }
 

@@ -26,5 +26,8 @@ namespace LibraryWebApp.Data
 
 
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
+
+        public DbSet<Posudba> Posudba { get; set; }
     }
 }

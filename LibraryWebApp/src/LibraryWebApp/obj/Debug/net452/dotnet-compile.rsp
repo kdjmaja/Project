@@ -218,6 +218,7 @@ D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Startup.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Controllers\AccountController.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Controllers\AdminController.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Controllers\HomeController.cs
+D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Controllers\MailmanController.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Controllers\ManageController.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Controllers\MemberController.cs
 D:\C#\Project\LibraryWebApp\src\LibraryWebApp\Data\ApplicationDbContext.cs

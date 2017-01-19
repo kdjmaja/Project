@@ -65,7 +65,7 @@ namespace LibraryWebApp.Controllers
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
             bool uspjelo = _repository.Posudi(Id, Guid.Parse(currentUser.Id), currentUser.UserName);
-            return RedirectToAction("MojePosudbe");
+            return RedirectToAction("Index");
 
 
         }
@@ -160,10 +160,13 @@ namespace LibraryWebApp.Controllers
 
             foreach (var posudba in model.Kosarica)
             {
-                posudba.Active = true;
                 posudba.ZaDostaviti = true;
                 posudba.Adresa = model.Adress;
+                posudba.ImeKupca = model.FirstName;
+                posudba.PrezimeKupca = model.LastName;
+                posudba.Phone = model.Phone;
                 posudba.DanPosudbe = DateTime.Now;
+                posudba.DanVracanja = posudba.DanPosudbe.AddMonths(1);
                 posudba.ZaCart = false;
                 _repository.UpdatePosudba(posudba);
             }

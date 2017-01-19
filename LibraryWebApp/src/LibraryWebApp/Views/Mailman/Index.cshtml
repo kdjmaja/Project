@@ -1,0 +1,58 @@
+@model List<LibraryWebApp.Models.Posudba>
+
+@{
+    ViewData["Title"] = "Deliveries";
+}
+
+<body>
+
+
+    @if (Model != null)
+    {
+        <h2>Dostaviti:</h2>
+        foreach (var posudba in Model)
+        {
+            if (posudba.ZaDostaviti)
+            {
+                <p style="font-size:150%">
+                    @posudba.Title | @posudba.Adresa | @posudba.ImeKupca
+                    @posudba.PrezimeKupca | @posudba.Phone
+                    @if (posudba.ZaKupnju)
+                    {
+                        <div>
+                            @posudba.Book.Price kn
+                            <input type="submit" value="Deliver" class="btn btn-primary" onclick="location.href = '@Url.Action("Dostavi", "Mailman", new { id = @posudba.PosudbaId })'" /><br /><br />
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div>
+                            0 kn
+                            <input type="submit" value="Deliver" class="btn btn-primary" onclick="location.href = '@Url.Action("Dostavi", "Mailman", new { id = @posudba.PosudbaId })'" /><br /><br />
+                        </div>
+                    }
+                </p>
+
+            }
+
+        }
+
+        <h2>Preuzeti:</h2>
+        foreach (var posudba in Model)
+        {
+            if (!posudba.ZaDostaviti && posudba.Active && posudba.DanVracanja.Date.Equals(DateTime.Now.Date))
+            {
+                <p style="font-size:150%">
+                    @posudba.Title | @posudba.Adresa | @posudba.ImeKupca
+                    @posudba.PrezimeKupca | @posudba.Phone<br />
+                    <input type="submit" value="Take back" class="btn btn-primary" onclick="location.href = '@Url.Action("Preuzmi", "Mailman", new { id = @posudba.PosudbaId })'" /><br /><br />
+                </p>
+
+            }
+
+        }
+
+    }
+</body>
+

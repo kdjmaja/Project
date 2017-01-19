@@ -273,7 +273,7 @@ namespace LibraryWebApp.Models
 
         public List<Posudba> GetForMailman()
         {
-            return _context.Posudbe.Include(p => p.Book).Where(s => s.ZaDostaviti && !s.Active).ToList();     
+            return _context.Posudbe.Include(p => p.Book).ToList();     
         }
 
 
@@ -296,6 +296,7 @@ namespace LibraryWebApp.Models
                 item.ZaDostaviti = temp.ZaDostaviti;
                 item.Adresa = temp.Adresa;
                 item.DanPosudbe = temp.DanPosudbe;
+                item.DanVracanja = temp.DanVracanja;
                 item.ZaCart = temp.ZaCart;
 
             }
@@ -305,7 +306,7 @@ namespace LibraryWebApp.Models
 
         public Posudba GetPosudba(Guid id)
         {
-            return _context.Posudbe.Include(s => s.Book).Include(p=>p.Quantity).FirstOrDefault(s => s.PosudbaId.Equals(id));
+            return _context.Posudbe.Include(s => s.Book).FirstOrDefault(s => s.PosudbaId.Equals(id));
         }
 
 

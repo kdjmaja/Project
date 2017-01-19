@@ -22,9 +22,7 @@
         <thead>
         <th>Product</th>
         <th>Title</th>      
-        <th>Quantity</th>
-        <th>Change quantity</th>
-        <th></th>
+
         <th>Type</th>
         <th>Price</th>
         <th>Action</th>
@@ -71,24 +69,8 @@
                              
                         @if (item.ZaKupnju)
                         {
-                            <td>
-                                @item.Quantity / @item.Book.SaleCounter
-                            </td>
-                            <td style="text-align:right">
-                                <div>
-                                    @*@{string quantity = "1";
-                                        <input type="text" id="quantity" value="1" asp-for="@item.Quantity"/>
-                                        <textarea id="BuyQuantity" spellcheck="false" class="form-control" style="min-width: 1%;max-width:10%;margin-left:20%" rows="1" placeholder="@item.Quantity" value=""></textarea>
-                                        <input type="submit" style="margin-right:60%" id="navbarButton" value="Submit" class="btn btn-primary" onclick="location.href = '@Url.Action("CheckQuantity", "Member", new {model = Model, quantity = Model.Quantity, id = @item.PosudbaId})'" />
-                                    }*@
-                                        
-
-                                        </div>
-
-                              </td>
-                                <td>
-                                    
-                                </td>
+                           
+                               
                             <td>Buying</td>
                             
                             
@@ -96,11 +78,8 @@
                         }
                         else
                         {
-                            <td>
-                                @item.Quantity
-                            </td>
-                            <td></td>
-                            <td>/</td>
+
+                    
                             <td>Borrowing</td>
                             
                             <td>0 kn</td>
@@ -124,8 +103,7 @@
 
                     </td>
                     <td></td>
-                    <td></td>
-                    <td></td>
+
                     <td>10 kn</td>
                     <td>
                     </td>
@@ -134,8 +112,7 @@
                 <tr>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
+
                     <td style="text-align: right">Total:</td>
                     <td> @price kn</td>
                     <td><div >
@@ -193,6 +170,11 @@
                             <label for="exampleInputEmail1">Delivery address</label>
                             <textarea id="exampleInputEmail3" spellcheck="false" class="form-control" style="min-width: 100%" rows="1" placeholder="Adress" asp-for="Adress"></textarea>
                             <strong><span class="text-danger" asp-validation-for="Adress"></span></strong><br />
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Phone</label>
+                            <textarea id="exampleInputEmail3" spellcheck="false" class="form-control" style="min-width: 100%" rows="1" placeholder="Phone" asp-for="Phone"></textarea>
+                            <strong><span class="text-danger" asp-validation-for="Phone"></span></strong><br />
                         </div>
 
                         <div class="modal-footer">
