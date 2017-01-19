@@ -1,0 +1,32 @@
+﻿@model List<Posudba>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+</head>
+<body>
+<div>
+      @if (Model != null)
+      {
+        <div class="thumbnail" style="text-align:center; margin-left:30%; margin-right:30%;">
+            <h1>Dostave:</h1>
+
+            @foreach (var item in Model)
+            {
+                <div class="thumbnail">
+                  <p>@item.Adresa , @item.Book.Title</p>  
+                </div>
+            }
+
+
+        </div>
+      }
+</div>
+</body>
+</html>

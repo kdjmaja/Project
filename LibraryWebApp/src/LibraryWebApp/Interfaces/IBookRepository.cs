@@ -37,8 +37,11 @@ namespace LibraryWebApp.Interfaces
 
         Writer GetWriter(Guid writerId);
 
+        void UpdatePosudba(Posudba temp);
 
         void RemoveFromCart(Guid Id);
+
+        List<Posudba> GetForMailman();
 
 
         //List<Book> GetFiltered(Func<Book, bool> filterFunction, Guid userId);

@@ -19,7 +19,9 @@
             padding-top: 50px;
             padding-bottom: 20px;
         }
+
     </style>
+   
 
 </head>
 <body id="backGR">
@@ -35,7 +37,7 @@
         <div class="row">
             <div role="tabpanel" style="margin-top: 80px;">
                 <div class="col-lg-3 col-sm-4 col-lg-offset-0">
-                    <ul class="nav nav-pills brand-pills nav-stacked" role="tablist" id="tablistColor">
+                    <ul class="nav nav-pills brand-pills nav-stacked" role="tablist" id="tablistColor" >
                         <li><a asp-area="" asp-controller="Member" asp-action="Index" id="navbarTextColor">All books</a></li>
                         <li><a asp-area="" asp-controller="Member" asp-action="BooksOfGenre" asp-route-id="@Genres.Fiction" id="navbarTextColor">Fiction</a></li>
                         <li><a asp-area="" asp-controller="Member" asp-action="BooksOfGenre" asp-route-id="@Genres.RealisticFiction" id="navbarTextColor">Realistic Fiction</a></li>
@@ -45,10 +47,7 @@
                         <li><a asp-area="" asp-controller="Member" asp-action="BooksOfGenre" asp-route-id="@Genres.NonFiction" id="navbarTextColor">Non-Fiction</a></li>
                         <li><a asp-area="" asp-controller="Member" asp-action="BooksOfGenre" asp-route-id="@Genres.SciFi" id="navbarTextColor">Sci-Fi</a></li>
 
-                        @*<li role="presentation" class="brand-nav active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">All books</a></li>
-                            <li role="presentation" class="brand-nav"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Genre 1</a></li>
-                            <li role="presentation" class="brand-nav"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">Genre 2</a></li>
-                            <li role="presentation" class="brand-nav"><a href="#tab4" aria-controls="tab4" role="tab" data-toggle="tab">Genre 3</a></li>*@
+                     
                     </ul>
                 </div>
                 <div class="col-lg-9 col-sm-9">
@@ -57,6 +56,7 @@
                             <p>
                                 @if (Model != null)
                                 {
+                                   
                                     <div class="row">
                                         @foreach (var item in Model)
                                         {
@@ -80,8 +80,8 @@
                                                     </h3>
                                                     <p>Author: @item.Writer.LastName, @item.Writer.FirstName </p>
                                                     <p>
-                                                        <input type="submit" value="Borrow" class="btn btn-primary" onclick="location.href = '@Url.Action("BorrowBook", "Member", new {id = @item.BookId})'" />
-                                                        <input type="submit" value="Buy" class="btn btn-primary" onclick="location.href = '@Url.Action("BuyBook", "Member", new {id = @item.BookId})'" />
+                                                        <input type="submit" value="Borrow" class="btn btn-primary" onclick=" if (confirm('This item will be added to cart. Is that OK?')) {location.href = '@Url.Action("BorrowBook", "Member", new {Id = @item.BookId})';} " />
+                                                        <input type="submit" value="Buy" class="btn btn-primary"  onclick=" if (confirm('This item will be added to cart. Is that OK?')) { location.href = '@Url.Action("BuyBook", "Member", new {Id = @item.BookId})';}  " />
                                                     </p>
                                                 </div>
                                             </div>
@@ -94,47 +94,7 @@
                                 </p>
 
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="tab2">
-                                <p>
-                                    Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata corpora quaeritis.
-                                    Summus brains sit, morbo vel maleficia? De apocalypsi gorger omero undead survivor dictum mauris.
-                                    Hi mindless mortuis soulless creaturas, imo evil stalking monstra adventus resi dentevil vultus comedat cerebella viventium.
-                                    Qui animated corpse, cricket bat max brucks terribilem incessu zomby.
-                                </p>
-                                <p>
-                                    The voodoo sacerdos flesh eater, suscitat mortuos comedere
-                                    carnem virus. Zonbi tattered for solum oculi eorum defunctis go lum cerebro. Nescio brains an Undead zombies.
-                                    Sicut malus putrid voodoo horror. Nigh tofth eliv ingdead.
-                                </p>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="tab3">
-                                <p>
-                                    Lorem ipsizzle dolor away amizzle, consectetuer pizzle elizzle. Nullizzle yo velizzle, check it out volutpizzle, quis, gravida vel, yo.
-                                    Ma nizzle eget tortor. Sizzle eros. My shizz izzle dolizzle gizzle turpis tempizzle fo shizzle mah nizzle fo rizzle, mah home g-dizzle.
-                                    Maurizzle pellentesque nibh izzle own yo'. Check it out in tortor. Pellentesque fizzle rhoncizzle nisi.
-                                </p>
-                                <p>
-                                    In hac habitasse platea dictumst. Shizzlin dizzle dapibus. You son of a bizzle tellizzle urna, pretizzle fo shizzle mah nizzle fo rizzle, mah home g-dizzle,
-                                    ghetto ac, check it out vitae, nunc. Shizzlin dizzle suscipizzle. Integizzle sempizzle velit sizzle dizzle.
-                                </p>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="tab4">
-                                <p>
-                                    Collaboratively administrate empowered markets via plug-and-play networks.
-                                    Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without
-                                    revolutionary ROI.
-                                </p>
-                                <p>
-                                    Efficiently unleash cross-media information without cross-media value.
-                                    Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar
-                                    solutions without functional solutions.
-                                </p>
-                                <p>
-                                    Completely synergize resource sucking relationships via premier niche markets. Professionally cultivate
-                                    one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service
-                                    for state of the art customer service.
-                                </p>
-                            </div>
+                             
                         </div>
                     </div>
                 </div>

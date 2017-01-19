@@ -1,0 +1,84 @@
+﻿@model CheckoutModel
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Order</title>
+</head>
+<body>
+<br/>
+<br />
+<br />
+<br />
+<br />
+<br />
+<center id="aboutText" style="font-size: 200%">Thank You! Your Order Has Been successfully completed.</center>
+
+    <div class="container" style="background: #cccccc; margin-top: 50px; border-radius: 10px;">
+        <table class="table table-striped">
+            <thead>
+            <th>#</th>
+            <th>Title</th>
+            <th>Writer</th>
+            <th>Address</th>
+            <th>Type</th>
+            <td>Price</td>
+            </thead>
+            <tbody>
+            @{
+                if (Model != null)
+                {
+                    double price = 0;
+                    int a = 1;
+                    if (Model != null)
+                    {
+                        foreach (var item in Model.Kosarica)
+                        {
+                            price += item.Book.Price;
+                            <tr>
+                                <td>@a</td>
+                                <td>@item.Title</td>
+                                <td>@item.Writer.LastName, @item.Writer.FirstName</td>
+                                <td>@item.Adresa</td>
+                                @if (item.ZaKupnju)
+                                {
+                                    <td>For buy</td>
+                                }
+                                else
+                                {
+                                    <td>For borrow</td>
+                                }
+                                <td>@item.Book.Price</td>
+
+                            </tr>
+                            a++;
+                        }
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td style="text-align: right">Sum:</td>
+                            <td> @price</td>
+
+                        </tr>
+                    }
+                }
+
+            }
+            </tbody>
+        </table>
+    </div>
+    <br/>
+    <br/>
+    <center>
+        <input type="submit" id="navbarButton" value="Return to homepage" class="btn btn-primary btn-lg" onclick="location.href = '@Url.Action("Index","Home")'" />
+    </center>
+   
+   
+
+</body>
+</html>

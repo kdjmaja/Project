@@ -20,6 +20,9 @@
     border-radius: 10px;
 
 }
+
+
+
 #tablistColor:hover {
     transition: 100ms ease-in;
     background-color: #303136;
@@ -43,7 +46,7 @@
 
 }
 #buttonMy:hover {
-    transition:200ms ease-in;
+    transition:2000ms ease-in;
     background: white;
     color: #333333;
 }
@@ -105,6 +108,15 @@ textarea {
 }
 #navbarButton:hover {
     background: #004ab3;
+}
+#buyButton {
+    width: 137px; 
+    background-color: #00b300;
+}
+
+#buyButton:hover {
+    width: 137px; 
+    background-color: #006600;
 }
 
 

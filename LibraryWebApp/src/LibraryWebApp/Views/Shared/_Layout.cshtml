@@ -50,7 +50,6 @@
                 <li><a asp-area="" asp-controller="Member" asp-action="AllWriters" id="navbarTextColor">Writers</a></li>
                 <li><a asp-area="" asp-controller="Home" asp-action="About" id="navbarTextColor">About</a></li>
                 <li><a asp-area="" asp-controller="Home" asp-action="Contact" id="navbarTextColor">Contact</a></li>
-                <li><a href="#">Link</a></li>
                 
                 @if(User.Claims.Any(s => s.Value.Equals("Admin"))){ 
                 <li class="dropdown">
@@ -88,7 +87,10 @@
                 }
                 else
                 {
-                    <li><a id="navbarTextColor">Hello @UserManager.GetUserName(User)!</a></li>
+                    <li><a id="navbarTextColor" style="margin-right: 10px;">Hello @UserManager.GetUserName(User)!</a></li>
+                    <a asp-area="" asp-controller="Member" asp-action="GetBasket" class="navbar-brand">
+                        <img class="img-responsive" src="/images/kosarica.png" style="height: 40px; width: 50px; margin-top: 15px" id="logoConfig">
+                    </a>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" id="navbarTextColor" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
                         <ul class="dropdown-menu">

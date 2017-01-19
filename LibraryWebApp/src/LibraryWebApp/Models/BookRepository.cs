@@ -257,6 +257,34 @@ namespace LibraryWebApp.Models
 
         }
 
+        public List<Posudba> GetForMailman()
+        {
+            return _context.Posudbe.Include(p => p.Book).Where(s => s.ZaDostaviti && !s.Active).ToList();     
+        }
+
+
+        public void UpdatePosudba(Posudba temp)
+        {
+            if (temp == null) throw new NullReferenceException();
+
+            var item = _context.Posudbe.FirstOrDefault(p => p.PosudbaId.Equals(temp.PosudbaId));
+            if (temp == null)
+            {
+                throw new NullReferenceException();
+            }
+            else
+            {
+                item.Active = temp.Active;
+                item.ZaDostaviti = temp.ZaDostaviti;
+                item.Adresa = temp.Adresa;
+                item.DanPosudbe = temp.DanPosudbe;
+                item.ZaCart = temp.ZaCart;
+
+            }
+            _context.SaveChanges();
+
+        }
+
 
     }
 }

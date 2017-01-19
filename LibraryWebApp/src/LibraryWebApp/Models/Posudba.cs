@@ -18,6 +18,8 @@ namespace LibraryWebApp.Models
         public string Username { get; set; }
         public bool ZaKupnju { get; set; }
         public bool ZaCart { get; set; }
+        public bool ZaDostaviti { get; set; }
+        public string Adresa { get; set; }
 
         public Posudba()
         {
@@ -32,10 +34,11 @@ namespace LibraryWebApp.Models
             PosudbaId = Guid.NewGuid();
             DanPosudbe = DateTime.Now;
             DanVracanja = DanPosudbe.AddMonths(1);
-            Active = true;
+            Active = false;
             Username = username;
             ZaKupnju = zakupnju;
             ZaCart = zacart;
+            ZaDostaviti = false;
         }
 
         public override bool Equals(object obj)

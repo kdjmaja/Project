@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryWebApp.Controllers
 {
-    
+
     public class MemberController : Controller
     {
         private readonly IBookRepository _repository;
@@ -27,17 +27,19 @@ namespace LibraryWebApp.Controllers
             item.Reverse();
             return View(item);
         }
+
         public async Task<IActionResult> GetBasket()
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
-            var list = _repository.GetAllFromCart(Guid.Parse(currentUser.Id));
-            return View("MyShoppingCart", list);
+            CheckoutModel model = new CheckoutModel();
+            model.Kosarica =  _repository.GetAllFromCart(Guid.Parse(currentUser.Id));
+            return View("MyShoppingCart", model);
         }
 
         public async Task<IActionResult> BorrowBook(Guid Id)
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
-            bool uspjelo = _repository.Posudi(Id, Guid.Parse(currentUser.Id),currentUser.UserName);
+            bool uspjelo = _repository.Posudi(Id, Guid.Parse(currentUser.Id), currentUser.UserName);
             return RedirectToAction("MojePosudbe");
 
 
@@ -49,7 +51,7 @@ namespace LibraryWebApp.Controllers
             bool uspjelo = _repository.Kupi(Id, Guid.Parse(currentUser.Id), currentUser.UserName);
             return RedirectToAction("Index");
 
-  
+
         }
 
         public async Task<IActionResult> Produzi(Guid Id)
@@ -80,6 +82,7 @@ namespace LibraryWebApp.Controllers
             var pisac = _repository.GetWriter(Id);
             return View(pisac);
         }
+
         public IActionResult BookDetails(Guid Id)
         {
             var item = _repository.Get(Id);
@@ -90,13 +93,13 @@ namespace LibraryWebApp.Controllers
         {
             var items = _repository.GetAllBooks();
             List<Book> item = new List<Book>();
-            foreach(var book in items)
+            foreach (var book in items)
             {
                 if (book.Genre == Id)
                     item.Add(book);
             }
             item.Reverse();
-            return View("Index",item);
+            return View("Index", item);
         }
 
         //NAPRAVITI
@@ -104,9 +107,35 @@ namespace LibraryWebApp.Controllers
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);
             _repository.RemoveFromCart(Id);
-           //_repository.MojePosubeList(Guid.Parse(currentUser.Id)).Where(s=>s.PosudbaId.Equals(Id)).
             return RedirectToAction("GetBasket");
 
         }
+
+        //postar
+        public async Task<IActionResult> GetListForDeliver()
+        {
+            var list = _repository.GetForMailman();
+            return View(list);
+        }
+
+        public async Task<IActionResult> Buy(CheckoutModel model)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            model.Kosarica = _repository.GetAllFromCart(Guid.Parse(user.Id));
+
+            foreach (var posudba in model.Kosarica)
+            {
+                posudba.Active = true;
+                posudba.ZaDostaviti = true;
+                posudba.Adresa = model.Adress;
+                posudba.DanPosudbe = DateTime.Now;
+                posudba.ZaCart = false;
+                _repository.UpdatePosudba(posudba);
+            }
+
+            return View(model);
+        }
+
+
     }
 }
