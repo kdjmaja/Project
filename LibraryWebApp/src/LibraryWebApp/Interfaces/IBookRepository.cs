@@ -43,7 +43,9 @@ namespace LibraryWebApp.Interfaces
 
         List<Posudba> GetForMailman();
 
+        bool SetQuantity(int quantity, Posudba posudba);
 
-        //List<Book> GetFiltered(Func<Book, bool> filterFunction, Guid userId);
+        Posudba GetPosudba(Guid id);
+
     }
 }

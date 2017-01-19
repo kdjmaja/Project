@@ -73,6 +73,24 @@ namespace LibraryWebApp.Models
             _context.SaveChanges();
         }
 
+        public bool SetQuantity(int quantity, Posudba posudba)
+        {
+
+            if (!posudba.Book.IsAvailableForSale())
+            {
+                return false;
+            }
+            if(quantity <= 0 || posudba.Book.SaleCounter < quantity)
+            {
+                return false;
+            }
+            posudba.Quantity = quantity;
+            var item = _context.Posudbe.FirstOrDefault(p => p.PosudbaId.Equals(posudba.PosudbaId));
+            item.Quantity = quantity;
+            _context.SaveChanges();
+            return true;
+        }
+
         public bool RemoveWriter(Guid WriterId)
         {
             var item = GetWriter(WriterId);
@@ -270,6 +288,10 @@ namespace LibraryWebApp.Models
             }
             else
             {
+                item.ImeKupca = temp.ImeKupca;
+                item.PrezimeKupca = temp.PrezimeKupca;
+                item.Phone = temp.Phone;
+                item.Quantity = temp.Quantity;
                 item.Active = temp.Active;
                 item.ZaDostaviti = temp.ZaDostaviti;
                 item.Adresa = temp.Adresa;
@@ -279,6 +301,11 @@ namespace LibraryWebApp.Models
             }
             _context.SaveChanges();
 
+        }
+
+        public Posudba GetPosudba(Guid id)
+        {
+            return _context.Posudbe.Include(s => s.Book).Include(p=>p.Quantity).FirstOrDefault(s => s.PosudbaId.Equals(id));
         }
 
 

@@ -42,7 +42,11 @@ namespace LibraryWebApp
             modelBuilder.Entity<Posudba>().Property(s => s.Username);
             modelBuilder.Entity<Posudba>().Property(s => s.ZaKupnju).IsRequired();
             modelBuilder.Entity<Posudba>().Property(s => s.ZaDostaviti).IsRequired();
-            modelBuilder.Entity<Posudba>().Property(s => s.Adresa);
+            modelBuilder.Entity<Posudba>().Property(s => s.Adresa).IsOptional();
+            modelBuilder.Entity<Posudba>().Property(s => s.Phone).IsOptional();
+            modelBuilder.Entity<Posudba>().Property(s => s.ImeKupca).IsOptional();
+            modelBuilder.Entity<Posudba>().Property(s => s.PrezimeKupca).IsOptional();
+            modelBuilder.Entity<Posudba>().Property(s => s.Quantity).IsRequired();
 
 
 

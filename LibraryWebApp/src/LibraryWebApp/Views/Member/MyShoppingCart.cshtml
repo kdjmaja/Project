@@ -21,7 +21,10 @@
     <table class="table table-striped">
         <thead>
         <th>Product</th>
-        <th>Title</th>
+        <th>Title</th>      
+        <th>Quantity</th>
+        <th>Change quantity</th>
+        <th></th>
         <th>Type</th>
         <th>Price</th>
         <th>Action</th>
@@ -65,15 +68,46 @@
                             </div>
                                     
                         </td>
-                                 
+                             
                         @if (item.ZaKupnju)
                         {
-                            <td>For buy</td>
+                            <td>
+                                @item.Quantity / @item.Book.SaleCounter
+                            </td>
+                            <td style="text-align:right">
+                                <div>
+                                    @*@{string quantity = "1";
+                                        <input type="text" id="quantity" value="1" asp-for="@item.Quantity"/>
+                                        <textarea id="BuyQuantity" spellcheck="false" class="form-control" style="min-width: 1%;max-width:10%;margin-left:20%" rows="1" placeholder="@item.Quantity" value=""></textarea>
+                                        <input type="submit" style="margin-right:60%" id="navbarButton" value="Submit" class="btn btn-primary" onclick="location.href = '@Url.Action("CheckQuantity", "Member", new {model = Model, quantity = Model.Quantity, id = @item.PosudbaId})'" />
+                                    }*@
+                                        
+
+                                        </div>
+
+                              </td>
+                                <td>
+                                    
+                                </td>
+                            <td>Buying</td>
+                            
+                            
                             <td>@item.Book.Price kn</td>
                         }
                         else
                         {
-                            <td>For borrow</td>
+                            <td>
+                                @item.Quantity
+                            </td>
+                            <td></td>
+                            <td>Borrowing</td>
+                            
+                            <td>
+                                
+                            </td>
+                            <td>
+                                /
+                            </td>
                             <td>0 kn</td>
                         }
                         
@@ -94,7 +128,8 @@
                         </div>
 
                     </td>
-
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td>10 kn</td>
                     <td>
@@ -102,6 +137,8 @@
                 </tr>
                 a++;
                 <tr>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td style="text-align: right">Total:</td>

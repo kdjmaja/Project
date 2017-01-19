@@ -20,6 +20,10 @@ namespace LibraryWebApp.Models
         public bool ZaCart { get; set; }
         public bool ZaDostaviti { get; set; }
         public string Adresa { get; set; }
+        public string ImeKupca { get; set; }
+        public string PrezimeKupca { get; set; }
+        public string Phone { get; set; }
+        public int Quantity { get; set; }
 
         public Posudba()
         {
@@ -39,6 +43,7 @@ namespace LibraryWebApp.Models
             ZaKupnju = zakupnju;
             ZaCart = zacart;
             ZaDostaviti = false;
+            Quantity = 1;
         }
 
         public override bool Equals(object obj)

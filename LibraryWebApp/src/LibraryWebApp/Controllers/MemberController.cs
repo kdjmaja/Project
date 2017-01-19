@@ -118,6 +118,16 @@ namespace LibraryWebApp.Controllers
             return View(list);
         }
 
+        public async Task<IActionResult> CheckQuantity(CheckoutModel model, string quantity, Guid Id)
+        {
+            var posudba = _repository.GetPosudba(Id);
+            bool uspjesno = _repository.SetQuantity(int.Parse(quantity), posudba);
+
+            if (uspjesno) model.Quantity = int.Parse(quantity);
+
+            return View("MyShoppingCart", model);
+        }
+
         public async Task<IActionResult> Buy(CheckoutModel model)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
