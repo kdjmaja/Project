@@ -103,10 +103,7 @@ namespace LibraryWebApp.Models
             {
                 knjiga.Posudbe = new List<Posudba>();
             }
-            if (knjiga.Posudbe.FirstOrDefault(p => p.Username == username) == null ||
-                knjiga.Posudbe.FirstOrDefault(p => p.Username == username).Active == false)
-            {
-                //prebacit kod prave posudbe-kosarica
+
                 knjiga.Posudbe.Add(buy);
                 knjiga.SaleCounter--;
 
@@ -114,9 +111,8 @@ namespace LibraryWebApp.Models
 
                 _context.Posudbe.Add(buy);
                
-                return true;
-            }
-            return false;
+
+            return true;
         }
 
         public bool Posudi(Guid bookId, Guid userId, string username)

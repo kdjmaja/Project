@@ -96,23 +96,23 @@
                         <strong><span class="text-danger" asp-validation-for="Price"></span></strong><br />
                     </div>
                     <div class="form-group">
-                        <div class="checkbox" style="float:left">
-                            <label>
+                        <div class="checkbox" style="float:left;">
+                            <label style="margin-top: 25px">
                                 <input type="checkbox"> For sale
                             </label>
                         </div>
-                        <label for="exampleInputEmail1">Quantity</label>
-                        <textarea id="SaleQuantity" spellcheck="false" class="form-control" style="min-width: 60%" rows="1" placeholder="Number of books to add for sale" asp-for="SaleCounter"></textarea>
+                        <label for="exampleInputEmail1" style="margin-left: 150px">Quantity</label>
+                        <textarea id="SaleQuantity" spellcheck="false" class="form-control" style="min-width: 25px; margin-left: 150px;" rows="1" placeholder="Number of books to add for sale" asp-for="SaleCounter"></textarea>
                         <strong><span class="text-danger" asp-validation-for="SaleCounter"></span></strong><br/>
                     </div>
                     <div class="form-group">
                         <div class="checkbox" style="float:left">
-                            <label>
+                            <label style="margin-top: 25px">
                                 <input type="checkbox"> For borrowing
                             </label>
                         </div>
-                        <label for="exampleInputEmail1">Quantity</label>
-                        <textarea id="BorrowQuantity" spellcheck="false" class="form-control" style="min-width: 60%" rows="1" placeholder="Number of books to add for borrowing" asp-for="BorrowCounter"></textarea>
+                        <label for="exampleInputEmail1" style="margin-left: 117px">Quantity</label>
+                        <textarea id="BorrowQuantity" spellcheck="false" class="form-control" style="min-width: 10%; margin-left: 150px;" rows="1" placeholder="Number of books to add for borrowing" asp-for="BorrowCounter"></textarea>
                         <strong><span class="text-danger" asp-validation-for="BorrowCounter"></span></strong><br />
                     </div>
 

@@ -37,7 +37,12 @@
             {
                 foreach (var item in Model.Kosarica)
                 {
-                    price += item.Book.Price;
+                    @if (item.ZaKupnju)
+                    {
+                        price += item.Book.Price;
+
+                    }
+                    
                     <tr>
                         <td>
                             <div class="thumbnail" style="width: 100px">
@@ -64,24 +69,43 @@
                         @if (item.ZaKupnju)
                         {
                             <td>For buy</td>
+                            <td>@item.Book.Price kn</td>
                         }
                         else
                         {
                             <td>For borrow</td>
+                            <td>0 kn</td>
                         }
-                        <td>@item.Book.Price</td>
+                        
                         <td>
                             <input style="margin-right: -50px" type="submit" id="navbarButton" value="Remove from cart" class="btn btn-primary" onclick="location.href = '@Url.Action("MakniIzCart", "Member", new {id = @item.PosudbaId})'" />
                         </td>
                     </tr>
                     a++;
                 }
+                price += 10;
+                <tr>
+                    <td>
+                        Dostava
+                    </td>
+                    <td>
+                        <div>
 
+                        </div>
+
+                    </td>
+
+                    <td></td>
+                    <td>10 kn</td>
+                    <td>
+                    </td>
+                </tr>
+                a++;
                 <tr>
                     <td></td>
                     <td></td>
                     <td style="text-align: right">Total:</td>
-                    <td> @price</td>
+                    <td> @price kn</td>
                     <td><div >
                         <button data-toggle="modal" id="buyButton" data-target="#squarespaceModal1" class="btn btn-primary ">Buy</button>
                     </div></td>

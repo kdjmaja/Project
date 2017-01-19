@@ -36,7 +36,12 @@
                     {
                         foreach (var item in Model.Kosarica)
                         {
-                            price += item.Book.Price;
+                            if (item.ZaKupnju)
+                            {
+                                price += item.Book.Price;
+
+                            }
+
                             <tr>
                                 <td>@a</td>
                                 <td>@item.Title</td>
@@ -44,25 +49,37 @@
                                 <td>@item.Adresa</td>
                                 @if (item.ZaKupnju)
                                 {
-                                    <td>For buy</td>
+                                    <td>Buy</td>
+                                    <td>@item.Book.Price kn</td>
                                 }
                                 else
                                 {
-                                    <td>For borrow</td>
+                                    <td>Borrow</td>
+                                    <td>0 kn</td>
                                 }
-                                <td>@item.Book.Price</td>
+                                
 
                             </tr>
                             a++;
                         }
+                        price += 10;
+                        <tr>
+                            <td>Dostava</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>10 kn</td>
 
+                        </tr>
+                        a++;
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td style="text-align: right">Sum:</td>
-                            <td> @price</td>
+                            <td style="text-align: right">Total:</td>
+                            <td> @price kn</td>
 
                         </tr>
                     }

@@ -79,10 +79,30 @@
                                                         <a asp-controller="Member" asp-action="BookDetails" asp-route-id="@item.BookId">@item.Title</a>
                                                     </h3>
                                                     <p>Author: @item.Writer.LastName, @item.Writer.FirstName </p>
-                                                    <p>
-                                                        <input type="submit" value="Borrow" class="btn btn-primary" onclick=" if (confirm('This item will be added to cart. Is that OK?')) {location.href = '@Url.Action("BorrowBook", "Member", new {Id = @item.BookId})';} " />
-                                                        <input type="submit" value="Buy" class="btn btn-primary"  onclick=" if (confirm('This item will be added to cart. Is that OK?')) { location.href = '@Url.Action("BuyBook", "Member", new {Id = @item.BookId})';}  " />
-                                                    </p>
+                                                    
+                                                        @if (@item.Price == 0 && !@item.IsAvailableForSale())
+                                                        {
+                                                            <p>
+                                                                Not for sale<br />
+                                                            </p>
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <p>
+                                                                Price: @item.Price kn<br />
+                                                            </p>
+                                                        }
+
+@if (User.Claims.Any(s => s.Value.Equals("Member")))
+{
+    <p>
+        <input type="submit" value="Borrow" class="btn btn-primary" onclick=" if (confirm('This item will be added to cart. Is that OK?')) {location.href='@Url.Action("BorrowBook", "Member", new {Id = @item.BookId})' ;} " />
+        <input type="submit" value="Buy" class="btn btn-primary" onclick=" if (confirm('This item will be added to cart. Is that OK?')) { location.href='@Url.Action("BuyBook", "Member", new {Id = @item.BookId})' ;} " />
+    </p>
+
+}
+
                                                 </div>
                                             </div>
                                         </div>

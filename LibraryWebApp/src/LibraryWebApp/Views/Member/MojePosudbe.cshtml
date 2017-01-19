@@ -1,15 +1,15 @@
 @model List<Posudba>
 
 @{
-    ViewData["Title"] = "Moje Posudbe";
+    ViewData["Title"] = "Borrowed books";
 }
 
-<h1>Moje posudbe</h1>
+<h1>Borrowed books</h1>
 
 <form asp-action="MojePosudbe">
     @if (Model != null)
     {
-        <h2>Aktivne posudbe:</h2>
+        <h2>Active borrows:</h2>
         foreach (var item in Model)
         {
             if (item.Active && !item.ZaCart && !item.ZaKupnju)
@@ -21,7 +21,18 @@
             }
 
         }
-        <h2>Sve posudbe:</h2>
+        <h2>Waiting for delivery:</h2>
+        foreach (var item in Model)
+        {
+            if (item.ZaDostaviti)
+            {
+                <p>
+                    @item.Title, @item.DanPosudbe.ToShortDateString() - @item.DanVracanja.ToShortDateString()
+                </p>
+            }
+
+        }
+        <h2>All:</h2>
         foreach (var item in Model)
         {
             if (!item.ZaCart && !item.ZaKupnju)

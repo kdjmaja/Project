@@ -31,8 +31,32 @@
                     <p>
                         Genre: @Model.Genre<br />
                         About: @Model.About<br />
-                        <input type="submit" value="Borrow" class="btn btn-primary" onclick="location.href = '@Url.Action("BorrowBook", "Member", new { id = @Model.BookId })'" />
-                        <a href="#" class="btn btn-default" role="button">Buy</a>
+                        Price: @Model.Price kn<br />
+                    @if (User.Claims.Any(s => s.Value.Equals("Member")))
+                    {
+                        @if (@Model.IsAvailableForBorrowing() && @Model.BorrowCounter!=0)
+                        {
+                            <input type="submit" value="Borrow" class="btn btn-primary" onclick="location.href = '@Url.Action("BorrowBook", "Member", new { id = @Model.BookId })'" />
+
+                        }
+                        else
+                        {
+                            <input type="button" value="Currently not available for borrowing." />
+
+                        }
+                        @if (@Model.IsAvailableForSale() && @Model.SaleCounter!=0)
+                        {
+                            <input type="submit" value="Buy" class="btn btn-primary" onclick=" if (confirm('This item will be added to cart. Is that OK?')) { location.href='@Url.Action("BuyBook", "Member", new {Id = @Model.BookId})' ;} " />
+
+                        }
+                        else
+                        {
+                            <input type="button" value="Currently not available for buying." />
+
+                        }
+                    }
+
+                        
                     </p>
                 </div>
                     @*<p>
@@ -51,9 +75,10 @@
 
                     </p>*@
 
-
-                    @Html.ActionLink("Edit", "Index", new { /* id = Model.PrimaryKey */ }) |
-                    <a asp-action="Index">Back to List</a>
+                <p style="text-align:center; ">
+                    <input type="button" value="Back to list" class="btn btn-primary" onclick="location.href = '@Url.Action("Index", "Member")'" />
+                </p>
+                    
                 </div>
     }
     </div>
