@@ -28,6 +28,31 @@ namespace LibraryWebApp.Controllers
             return View(item);
         }
 
+
+
+        public IActionResult Search(string search)
+        {
+            if(search == null)
+            {
+                return RedirectToAction("Index");
+            }
+            if(search.DefaultIfEmpty() == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var searched = search.ToLower();
+            var books = _repository.GetAllBooks();
+            List<Book> model = new List<Book>();
+            foreach(var book in books)
+            {
+                if(book.Title.ToLower().Contains(searched) || searched.Contains(book.Title.ToLower()) || book.Writer.FirstName.ToLower().Contains(searched) || searched.Contains(book.Writer.FirstName.ToLower()) || book.Writer.LastName.ToLower().Contains(searched) || searched.Contains(book.Writer.LastName.ToLower()))
+                {
+                    model.Add(book);
+                }
+            }
+            return View("Index", model);
+        }
+
         public async Task<IActionResult> GetBasket()
         {
             ApplicationUser currentUser = await _userManager.GetUserAsync(HttpContext.User);

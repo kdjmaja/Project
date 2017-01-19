@@ -41,7 +41,7 @@
                         }
                         else
                         {
-                            <input type="button" value="Currently not available for borrowing." />
+                            <input type="button" value="Currently not available for borrowing." onclick="return false;"/>
 
                         }
                         @if (@Model.IsAvailableForSale() && @Model.SaleCounter!=0)
