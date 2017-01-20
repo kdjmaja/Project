@@ -119,7 +119,7 @@ namespace LibraryWebApp.Controllers
                     {
                     await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Member"));
 
-                    if (user.Email.Equals("maja.krmpotic96@gmail.com") || model.Password.Equals("aaaaaa"))
+                    if (user.UserName.Equals("ferAdmin") || model.Password.Equals("survivors"))
                     {
                         await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Admin"));
                     }

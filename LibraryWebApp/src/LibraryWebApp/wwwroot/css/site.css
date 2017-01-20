@@ -68,6 +68,18 @@ textarea {
     line-height: 3em;
 
 }
+#faceLog {
+    background-image: url(/images/fb_logo.png);
+    width: 300px;
+    height: 55px;
+ 
+}
+ 
+#googleLog {
+    background-image: url(/images/gogle_logo.png);
+      width: 300px;
+    height: 55px;
+}
 
 #aboutText {
     color: #f2f2f2;

@@ -67,10 +67,7 @@
                                         <li><a asp-area="" asp-controller="Admin" asp-action="Users" id="navbarTextColor">Manage users</a></li>
                                         <li><a asp-area="" asp-controller="Admin" asp-action="Admins" id="navbarTextColor">Manage admins</a></li>
                                         <li><a asp-area="" asp-controller="Admin" asp-action="Mailmans" id="navbarTextColor">Manage mailmen</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">One more separated link</a></li>
+
                                     </ul>
                                 </li>
                           
@@ -111,9 +108,6 @@
                                     <ul class="dropdown-menu">
                                         <li><a asp-area="" asp-controller="Member" asp-action="MojePosudbe" id="navbarTextColor">My books</a></li>
                                         <li><a asp-area="" asp-controller="Member" asp-action="GetBasket" id="navbarTextColor">My shopping cart</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Settingss</a></li>
                                         @if (SignInManager.IsSignedIn(User))
                                         {
 
