@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAArk4DlqYYvEOZc0PZiY/tmgAAAAACAAAAAAAQZgAAAAEAACAAAADR1Os+HGmneSB55NbaS0Ww+q+Dm+Fxug5gWtZpgK9KugAAAAAOgAAAAAIAACAAAAB+h1eDwy8G5bpQlF5Tn5k9Mhj4C8wwnWSibx7TRM+ioYAAAAB4rQP+3MfBbqxs4Y52ws1AV3K0hWFmMCjLH1YcR84GLr7723OgqQfxw+5+rGZ6y6OErg7GqjZsHfVdajE2IW1DLAwqVIhfqdLHg5SdpgqYRPyCwkUdte+sXBjij2CHKZ5c5RlEINHLnIGiEWTKSSX9v/QrU6C/q2qqh0kNB6J/MUAAAAAPCUgDtISxWpg0U0tqVyw6B8CXvpKYiYClUCcD4+EA3L8Gd2UyU5ufgZ/5kYAsMTWTjIlSaKtBeug/z/iwMUh7</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <EfMigrations Include="LibraryWebApp.Data.ApplicationDbContext">
+      <Value>Server=tcp:ynl.database.windows.net,1433;Initial Catalog=YNLdatabase;Persist Security Info=False;User ID=ynlteam;Password=3FERbitches;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;</Value>
+    </EfMigrations>
+  </ItemGroup>
+</Project>

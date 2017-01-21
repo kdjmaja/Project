@@ -75,6 +75,8 @@
       "wwwroot",
       "**/*.cshtml",
       "appsettings.json",
+      "appsettings.development.json",
+      "appsettings.production.json",
       "web.config"
     ]
   },
