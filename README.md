@@ -3,8 +3,8 @@
 https://ynl.azurewebsites.net/
 
 #Izradili:
-	Lea Rački
-	Vlado Galić
+	Lea Rački https://github.com/rackilea
+	Vlado Galić https://github.com/galiuskas24
 	Maja Krmpotić Đurđević
 	
 #Podjela zadataka:
